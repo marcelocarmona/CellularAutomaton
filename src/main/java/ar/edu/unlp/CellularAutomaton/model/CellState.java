@@ -7,8 +7,15 @@ public interface CellState {
 	public boolean isAlive();
 	public boolean isDead();
 	
-	public void changeState(GameOfLifeCell cell);
+	public void transitionFunction(GameOfLifeCell cell);
 	public void switchState(GameOfLifeCell cell);
-	public void updateNeighbors(GameOfLifeCell gameOfLifeCell);
+	public void addAliveNeighbor(GameOfLifeCell gameOfLifeCell);
+	
+	/**
+	 * @return RGB color
+	 */
+	public int getColor();
+	
+	
 
 }

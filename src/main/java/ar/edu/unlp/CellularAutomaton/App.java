@@ -1,8 +1,7 @@
 package ar.edu.unlp.CellularAutomaton;
 
-import java.awt.EventQueue;
-
 import ar.edu.unlp.CellularAutomaton.view.Window;
+import java.awt.EventQueue;
 
 
 /**
@@ -20,7 +19,8 @@ public class App
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new Window();
+					Window frame = new Window();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

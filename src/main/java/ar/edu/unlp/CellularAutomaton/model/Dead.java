@@ -10,7 +10,7 @@ public class Dead implements CellState {
 		return true;
 	}
 
-	public void changeState(GameOfLifeCell cell) {
+	public void transitionFunction(GameOfLifeCell cell) {
 		if (cell.getAliveNeighbors() == 3) {
 			switchState(cell);
 		}
@@ -19,15 +19,16 @@ public class Dead implements CellState {
 	public void switchState(GameOfLifeCell cell) {
 		cell.setState(GameOfLifeCell.ALIVE);
 	}
-
-	public void updateNeighbors(GameOfLifeCell cell) {
-		for (GameOfLifeCell neighborCell : cell.getNeighbors()) {
-			neighborCell.subNeighbor();
-		}
+	
+	public void addAliveNeighbor(GameOfLifeCell gameOfLifeCell) {
+		// this state is dead, not add	
+	}
+	
+	public int getColor(){
+		return 0x404040;
 	}
 
 	public String toString() {
-		return "0";
+		return "Dead";
 	}
-
 }

@@ -10,7 +10,7 @@ public class Alive implements CellState {
 		return false;
 	}
 
-	public void changeState(GameOfLifeCell cell) {
+	public void transitionFunction(GameOfLifeCell cell) {
 		if (cell.getAliveNeighbors() < 2 || cell.getAliveNeighbors() > 3) {
 			switchState(cell);
 		}
@@ -19,15 +19,16 @@ public class Alive implements CellState {
 	public void switchState(GameOfLifeCell cell) {
 		cell.setState(GameOfLifeCell.DEAD);
 	}
-
-	public void updateNeighbors(GameOfLifeCell cell) {
-		for (GameOfLifeCell neighborCell : cell.getNeighbors()) {
-			neighborCell.addNeighbor();
-		}
+	
+	public void addAliveNeighbor(GameOfLifeCell cell) {
+		cell.addNeighbor();
+	}
+	
+	public int getColor(){
+		return 0xffffff;
 	}
 
 	public String toString() {
-		return "1";
+		return "Alive";
 	}
-
 }
