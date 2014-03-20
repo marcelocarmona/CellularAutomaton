@@ -111,17 +111,12 @@ public class GameOfLifeGrid {
 			public  void run() {
 				while (!barrierDone) {
 					try {
-						if(pausedDone) {
-							pauseLock.lock();
-							unpaused.await();
-							pauseLock.unlock();}
-						else {
+
 							countAliveNeighborsMatrix(numOfThreads, currentThread);
 							countAliveNeighborsBarrier.await();//CyclicBarrier await
 
 							transitionFuncionMatrix(numOfThreads, currentThread);
 							transitionFunctionBarrier.await();//CyclicBarrier await
-						}
 
 					
 					} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
@@ -134,6 +129,7 @@ public class GameOfLifeGrid {
 			@Override
 			public void run() {
 				try {
+					pauseLock.lock();
 					Thread.sleep(sleepTime);
 					generation++;
 					setChanged();
@@ -141,9 +137,8 @@ public class GameOfLifeGrid {
 					//finish the loop and paused threads
 					if (done == true)
 						barrierDone = true;
-					else if (paused == true){
-						pausedDone = true;
-					}
+
+					pauseLock.unlock();
 						
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -189,22 +184,10 @@ public class GameOfLifeGrid {
 		
 		public void pause() {
 			pauseLock.lock();
-			try {
-				paused = true;
-			} finally {
-				pauseLock.unlock();
-			}
 		}
 		
 		public void resume() {
-			pauseLock.lock();
-			try {
-				paused = false;
-				pausedDone = false;
-				unpaused.signalAll();
-			} finally {
-				pauseLock.unlock();
-			}
+			pauseLock.unlock();
 		}
 	}
 
@@ -257,7 +240,7 @@ public class GameOfLifeGrid {
 	/**
 	 * Reset the grid
 	 */
-	public synchronized void reset(){
+	private synchronized void reset(){
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				cells[col][row].setState(GameOfLifeCell.DEAD);
@@ -273,7 +256,7 @@ public class GameOfLifeGrid {
 	 * @throws ShapeException if shape does not fit on grid
 	 */
 	public synchronized void loadShape(Shape shape) throws ShapeException {
-		
+
 		//Shape Exception
 		if(cols < shape.getWidth() || rows < shape.getHeight())
 			throw new ShapeException("Shape doesn't fit on grid(grid: "+cols+"x"+rows+", shape: "+shape.getWidth()+"x"+shape.getHeight()+")");
@@ -294,6 +277,7 @@ public class GameOfLifeGrid {
 			
 			cells[col][row].setState(GameOfLifeCell.ALIVE);
 		}
+
 	}
 	
 	
