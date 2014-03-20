@@ -10,7 +10,7 @@ public class GameOfLifeCell {
 	
 	public GameOfLifeCell() {
 		super();
-		state = new Dead();
+		state = DEAD;
 		aliveNeighbors = 0;
 	}
 
@@ -55,10 +55,6 @@ public class GameOfLifeCell {
 	 */
 	public int getColor(){
 		return state.getColor();
-	}
-	
-	public void setColor(int RGB){
-		state.setColor(RGB);
 	}
 	
 	/* (non-Javadoc)

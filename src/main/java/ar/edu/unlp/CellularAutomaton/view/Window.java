@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -23,16 +21,14 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid.ManagerOfThreads;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 import ar.edu.unlp.CellularAutomaton.util.SpeedTime;
 
 
 import ar.edu.unlp.CellularAutomaton.util.CellSize;
+import ar.edu.unlp.CellularAutomaton.util.StartThread;
 
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
 
 
 public class Window extends JFrame {
@@ -52,12 +48,10 @@ public class Window extends JFrame {
 	private JComboBox<SpeedTime> speedBox;
 	private JLabel lblCells;
 	private JComboBox<CellSize> sizeBox;
-	private JLabel lblThreads;
-	private JComboBox<Integer> threadBox;
 	private JPanel bottomPanel;
 	
 
-	private ManagerOfThreads managerOfThreads;
+	private StartThread managerOfThreads;
 
 	/**
 	 * Create the frame.
@@ -74,20 +68,7 @@ public class Window extends JFrame {
 		setContentPane(contentPane);
 		
 		
-		setFocusable(true);
-		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				int key = e.getKeyCode();
-				if (key == KeyEvent.VK_ENTER) {
-					nextGeneration();
-					System.out.println("ENTER pressed");
-				}
-			}
-		});
-		
-		
-		//gridPanel <----------------------------------REFACTORING..........................
-		int cellsize = CellSize.values()[0].getValue();
+		//gridPanel
 		gridPanel = new GridPanel(20,20);
 		gridPanel.addGridPanelListener(new GridPanelListener() {
 			
@@ -95,13 +76,7 @@ public class Window extends JFrame {
 			public void sizeChanged(GridPanelEvent gridPanelEvent) {
 				
 				lblCells.setText("Grid("+gridPanelEvent.getCols()+", "+gridPanelEvent.getRows()+")");
-				
-				int threads = gridPanelEvent.getRows();
-				Integer[] arrayThreads = new Integer[threads];
-				for (int i = 0; i < threads; i++) {
-					arrayThreads[i]=i+1;
-				}
-				threadBox.setModel(new DefaultComboBoxModel<Integer>(arrayThreads));
+			
 				
 			}
 		});
@@ -149,33 +124,16 @@ public class Window extends JFrame {
 					startManagerOfThreads();
 					btnNext.setEnabled(false);
 					shapeBox.setEnabled(false);
-					threadBox.setEnabled(false);
 				} else {
 					tglbtnStart.setText("Start");
 					stopManagerOfThreads();
 					newManagerOfThreads();
 					btnNext.setEnabled(true);
 					shapeBox.setEnabled(true);
-					threadBox.setEnabled(true);
 				}
 			}
 		});
 		topPanel.add(tglbtnStart);
-		
-		
-		final JToggleButton tglbtnPause = new JToggleButton("Pause");
-		tglbtnPause.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					tglbtnPause.setText("Resume");
-					managerOfThreads.pause();
-				} else {
-					tglbtnPause.setText("Pause");
-					managerOfThreads.resume();
-				}
-			}
-		});
-		topPanel.add(tglbtnPause);
 		
 		
 		btnNext = new JButton("Next");
@@ -204,18 +162,6 @@ public class Window extends JFrame {
 			}
 		});
 		topPanel.add(sizeBox);
-		
-		lblThreads = new JLabel("Threads: ");
-		topPanel.add(lblThreads);
-		
-		threadBox = new JComboBox<Integer>();
-		threadBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				managerOfThreads.setNumOfThreads(getNumOfThreads());
-			}
-		});
-		threadBox.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1}));
-		topPanel.add(threadBox);
 		
 		//MenuBar
 		JMenuBar menuBar = new JMenuBar();
@@ -250,39 +196,20 @@ public class Window extends JFrame {
 	 * Create a Thread
 	 */
 	private void newManagerOfThreads(){
-//		startThread = new StartThread(this,getSpeedTime());
-		managerOfThreads = gridPanel.newManagerOfThreads(getSpeedTime(), getNumOfThreads());
-		managerOfThreads.addObserver(new Observer() {
-			
-			@Override
-			public void update(Observable o, Object arg) {
-				System.out.println("PROBANDOOOO");
-				gridPanel.repaint();
-				showGeneration();
-				
-			}
-		});
+		managerOfThreads = new StartThread(this,getSpeedTime());
 	}
 	
 	/**
 	 * Start Thread
 	 */
 	private void startManagerOfThreads(){
-//		startThread.start();
-//		singleThread.start();
-//		singleThread2.start();
 		managerOfThreads.start();
 	}
 	/**
 	 * Stop Thread
 	 */
 	private void stopManagerOfThreads(){
-//		startThread.finish();
-//		done =true;
-//		singleThread.finish();
-//		singleThread2.finish();
-		managerOfThreads.stop();
-		
+		managerOfThreads.finish();
 	}
 	
 	/**
@@ -293,16 +220,6 @@ public class Window extends JFrame {
 	private int getSpeedTime(){
 		SpeedTime speedTime = (SpeedTime) speedBox.getSelectedItem();
 		return speedTime.getValue();
-	}
-	
-	/**
-	 * Return the number of threads selected in the comboBox
-	 * 
-	 * @return number of thread
-	 */
-	private int getNumOfThreads(){
-		int numOfThreads = (int) threadBox.getSelectedItem();
-		return numOfThreads;
 	}
 	
 	/**

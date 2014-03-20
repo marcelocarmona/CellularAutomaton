@@ -1,7 +1,6 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
 public class Dead implements CellState {
-	private int color = 0x404040;
 
 	public boolean isAlive() {
 		return false;
@@ -26,16 +25,11 @@ public class Dead implements CellState {
 	}
 	
 	public int getColor(){
-		return color;
+		return 0x404040;
 	}
 
 	public String toString() {
 		return "Dead";
 	}
 
-	@Override
-	public void setColor(int rGB) {
-		color=rGB;
-		
-	}
 }

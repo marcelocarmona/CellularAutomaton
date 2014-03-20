@@ -3,11 +3,8 @@ package ar.edu.unlp.CellularAutomaton.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -23,7 +20,6 @@ import ar.edu.unlp.CellularAutomaton.exception.ShapeException;
 import ar.edu.unlp.CellularAutomaton.model.CellState;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
-import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid.ManagerOfThreads;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
 public class GridPanel extends JPanel implements Observer {
@@ -49,17 +45,12 @@ public class GridPanel extends JPanel implements Observer {
 		addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent evt) {
-				grid.getManagerOfThreads().pause();
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
 				GameOfLifeCell cell = grid.getCell(cellX, cellY);
 				cell.switchState();
 				saveState = cell.getState();
 				repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				grid.getManagerOfThreads().resume();
 			}
 
 		});
@@ -153,10 +144,6 @@ public class GridPanel extends JPanel implements Observer {
 
 	public int getRows() {
 		return grid.getRows();
-	}
-	
-	public ManagerOfThreads newManagerOfThreads(int speedTime, int numOfThreads){
-		return grid.newManagerOfThreads(speedTime, numOfThreads);
 	}
 
 	/**
