@@ -3,11 +3,18 @@ package ar.edu.unlp.CellularAutomaton.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,14 +23,16 @@ import ar.edu.unlp.CellularAutomaton.exception.ShapeException;
 import ar.edu.unlp.CellularAutomaton.model.CellState;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
+import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid.ManagerOfThreads;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
-public class GridPanel extends JPanel {
+public class GridPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	private GameOfLifeGrid grid;
 	private int cellSize = 20;
 	private CellState saveState;
+	private List<GridPanelListener>listeners;
 
 	/**
 	 * Create the GridPanel.
@@ -31,11 +40,16 @@ public class GridPanel extends JPanel {
 	public GridPanel(final int rows, final int cols) {
 		
 		grid = new GameOfLifeGrid(cols, rows);
+
+		
+		listeners = new ArrayList<GridPanelListener>();
 		
 		setBackground(Color.LIGHT_GRAY);
 		
 		addMouseListener(new MouseAdapter() {
+			
 			public void mousePressed(MouseEvent evt) {
+				grid.getManagerOfThreads().pause();
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
 				GameOfLifeCell cell = grid.getCell(cellX, cellY);
@@ -43,6 +57,11 @@ public class GridPanel extends JPanel {
 				saveState = cell.getState();
 				repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
 			}
+
+			public void mouseReleased(MouseEvent e) {
+				grid.getManagerOfThreads().resume();
+			}
+
 		});
 		
 	    addMouseMotionListener(new MouseMotionAdapter() {
@@ -59,6 +78,16 @@ public class GridPanel extends JPanel {
 				resized();
 			}
 		});
+
+
+	}
+	
+	/**
+	 * Add listener for this Panel
+	 * @param listener listener object
+	 */
+	public void addGridPanelListener(GridPanelListener listener){
+		listeners.add(listener);
 	}
 
 	public void nextGeneration() {
@@ -92,16 +121,25 @@ public class GridPanel extends JPanel {
 				g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
 //				g.drawOval(col * cellSize, row * cellSize, cellSize, cellSize);
 			}
-			g.setColor(Color.ORANGE);
-			g.drawString(grid.toString(),10,20);
+//			g.setColor(Color.ORANGE);
+//			g.drawString(grid.toString(),10,20);
 
 		}
 	}
 
 	public void resized() {
-		grid.resize(getWidth() / cellSize, getHeight() / cellSize);
-		// grid = new GameOfLifeGrid(getWidth()/cellSize, getHeight()/cellSize);
-		repaint();
+		int cols = getWidth() / cellSize;
+		int rows = getHeight() / cellSize;
+		if (cols != grid.getCols() || rows != grid.getRows()){
+			grid.resize(cols, rows);
+
+			repaint();
+			
+			GridPanelEvent gridPanelEvent = GridPanelEvent.getSizeChangedEvent(this, grid.getCols(), grid.getRows());
+			for (GridPanelListener listener : listeners) {
+				listener.sizeChanged(gridPanelEvent);
+			}
+		}
 	}
 
 	public void setCellSize(int value) {
@@ -116,12 +154,22 @@ public class GridPanel extends JPanel {
 	public int getRows() {
 		return grid.getRows();
 	}
+	
+	public ManagerOfThreads newManagerOfThreads(int speedTime, int numOfThreads){
+		return grid.newManagerOfThreads(speedTime, numOfThreads);
+	}
 
 	/**
 	 * creado para probar el thead concurrente
 	 */
 	public GameOfLifeGrid getGrid() {
 		return grid;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("Observer funcionando");
+		repaint();
 	}
 
 }

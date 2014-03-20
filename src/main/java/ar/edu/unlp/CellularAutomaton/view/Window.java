@@ -1,14 +1,12 @@
 package ar.edu.unlp.CellularAutomaton.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -25,24 +23,17 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid.ManagerOfThreads;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
-import ar.edu.unlp.CellularAutomaton.util.SingleThread;
-import ar.edu.unlp.CellularAutomaton.util.SingleThread2;
 import ar.edu.unlp.CellularAutomaton.util.SpeedTime;
-import ar.edu.unlp.CellularAutomaton.util.StartThread;
 
-import javax.swing.SwingConstants;
-
-import java.awt.FlowLayout;
 
 import ar.edu.unlp.CellularAutomaton.util.CellSize;
 
 import java.awt.Color;
-import java.util.concurrent.CyclicBarrier;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
 
 public class Window extends JFrame {
 
@@ -61,14 +52,12 @@ public class Window extends JFrame {
 	private JComboBox<SpeedTime> speedBox;
 	private JLabel lblCells;
 	private JComboBox<CellSize> sizeBox;
-	private JLabel lblTheads;
-	private JComboBox threadBox;
+	private JLabel lblThreads;
+	private JComboBox<Integer> threadBox;
 	private JPanel bottomPanel;
 	
-	private StartThread startThread;
-	private SingleThread singleThread;
-	private SingleThread2 singleThread2;
-	public boolean done =false;
+
+	private ManagerOfThreads managerOfThreads;
 
 	/**
 	 * Create the frame.
@@ -84,15 +73,38 @@ public class Window extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) {
-				resized();
+		
+		setFocusable(true);
+		addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					nextGeneration();
+					System.out.println("ENTER pressed");
+				}
 			}
 		});
+		
 		
 		//gridPanel <----------------------------------REFACTORING..........................
 		int cellsize = CellSize.values()[0].getValue();
 		gridPanel = new GridPanel(20,20);
+		gridPanel.addGridPanelListener(new GridPanelListener() {
+			
+			@Override
+			public void sizeChanged(GridPanelEvent gridPanelEvent) {
+				
+				lblCells.setText("Grid("+gridPanelEvent.getCols()+", "+gridPanelEvent.getRows()+")");
+				
+				int threads = gridPanelEvent.getRows();
+				Integer[] arrayThreads = new Integer[threads];
+				for (int i = 0; i < threads; i++) {
+					arrayThreads[i]=i+1;
+				}
+				threadBox.setModel(new DefaultComboBoxModel<Integer>(arrayThreads));
+				
+			}
+		});
 		contentPane.add(gridPanel, BorderLayout.CENTER);	
 
 		//bottomPanel
@@ -134,19 +146,37 @@ public class Window extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					tglbtnStart.setText("Stop");
-					startStartThread();
+					startManagerOfThreads();
 					btnNext.setEnabled(false);
 					shapeBox.setEnabled(false);
+					threadBox.setEnabled(false);
 				} else {
 					tglbtnStart.setText("Start");
-					stopStartThread();
-					newStartThread();
+					stopManagerOfThreads();
+					newManagerOfThreads();
 					btnNext.setEnabled(true);
 					shapeBox.setEnabled(true);
+					threadBox.setEnabled(true);
 				}
 			}
 		});
 		topPanel.add(tglbtnStart);
+		
+		
+		final JToggleButton tglbtnPause = new JToggleButton("Pause");
+		tglbtnPause.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					tglbtnPause.setText("Resume");
+					managerOfThreads.pause();
+				} else {
+					tglbtnPause.setText("Pause");
+					managerOfThreads.resume();
+				}
+			}
+		});
+		topPanel.add(tglbtnPause);
+		
 		
 		btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
@@ -158,7 +188,7 @@ public class Window extends JFrame {
 		speedBox = new JComboBox<SpeedTime>();
 		speedBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startThread.setSleepTime(getSpeedTime());
+				managerOfThreads.setSleepTime(getSpeedTime());
 			}
 		});
 		speedBox.setModel(new DefaultComboBoxModel<SpeedTime>(SpeedTime.values()));
@@ -171,17 +201,20 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CellSize CellSize = (CellSize) sizeBox.getSelectedItem();
 				gridPanel.setCellSize(CellSize.getValue());
-//				gridPanel.resize(CellSize.getWidth(),CellSize.getHeight());
-//				repaint();
 			}
 		});
 		topPanel.add(sizeBox);
 		
-		lblTheads = new JLabel("Theads: ");
-		topPanel.add(lblTheads);
+		lblThreads = new JLabel("Threads: ");
+		topPanel.add(lblThreads);
 		
-		threadBox = new JComboBox();
-		threadBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		threadBox = new JComboBox<Integer>();
+		threadBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				managerOfThreads.setNumOfThreads(getNumOfThreads());
+			}
+		});
+		threadBox.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1}));
 		topPanel.add(threadBox);
 		
 		//MenuBar
@@ -200,7 +233,7 @@ public class Window extends JFrame {
 		mnHelp.add(mntmAbout);
 		
 		//init thread
-		newStartThread();
+		newManagerOfThreads();
 	}
 	
 	
@@ -216,41 +249,39 @@ public class Window extends JFrame {
 	/**
 	 * Create a Thread
 	 */
-	private void newStartThread(){
-		startThread = new StartThread(this,getSpeedTime());
-//		final CyclicBarrier countAliveNeighborsBarrier = new CyclicBarrier(2);
-//		final CyclicBarrier transitionFunctionBarrier = new CyclicBarrier(2,new Runnable(){
-//			
-//			int i= 0;
-//			public void run() {repaint();i++;
-//				try {Thread.sleep(getSpeedTime());} catch (InterruptedException e) {e.printStackTrace();}
-//				showGeneration();
-//				lblNumGenerations.setText(Integer.toString(i));
-//				
-//			}
-//			
-//		});
-//
-//		singleThread = new SingleThread(this,gridPanel.getGrid(), getSpeedTime(), countAliveNeighborsBarrier, transitionFunctionBarrier);
-//		singleThread2 = new SingleThread2(this,gridPanel.getGrid(), getSpeedTime(), countAliveNeighborsBarrier, transitionFunctionBarrier);
+	private void newManagerOfThreads(){
+//		startThread = new StartThread(this,getSpeedTime());
+		managerOfThreads = gridPanel.newManagerOfThreads(getSpeedTime(), getNumOfThreads());
+		managerOfThreads.addObserver(new Observer() {
+			
+			@Override
+			public void update(Observable o, Object arg) {
+				System.out.println("PROBANDOOOO");
+				gridPanel.repaint();
+				showGeneration();
+				
+			}
+		});
 	}
 	
 	/**
 	 * Start Thread
 	 */
-	private void startStartThread(){
-		startThread.start();
+	private void startManagerOfThreads(){
+//		startThread.start();
 //		singleThread.start();
 //		singleThread2.start();
+		managerOfThreads.start();
 	}
 	/**
 	 * Stop Thread
 	 */
-	private void stopStartThread(){
-		startThread.finish();
-////		done =true;
+	private void stopManagerOfThreads(){
+//		startThread.finish();
+//		done =true;
 //		singleThread.finish();
 //		singleThread2.finish();
+		managerOfThreads.stop();
 		
 	}
 	
@@ -262,6 +293,16 @@ public class Window extends JFrame {
 	private int getSpeedTime(){
 		SpeedTime speedTime = (SpeedTime) speedBox.getSelectedItem();
 		return speedTime.getValue();
+	}
+	
+	/**
+	 * Return the number of threads selected in the comboBox
+	 * 
+	 * @return number of thread
+	 */
+	private int getNumOfThreads(){
+		int numOfThreads = (int) threadBox.getSelectedItem();
+		return numOfThreads;
 	}
 	
 	/**
@@ -278,37 +319,6 @@ public class Window extends JFrame {
 		JOptionPane.showMessageDialog(this, "Game Of Life - Carmona Marcelo - 2014");
 	}
 	
-	@Override
-	public void update(Graphics g) {
-		// TODO Auto-generated method stub
-		super.update(g);
-		lblCells.setText("Grid("+gridPanel.getCols()+", "+gridPanel.getRows()+")");
-	}
 
 
-	@Override
-	public void paintComponents(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paintComponents(g);
-		lblCells.setText("Grid("+gridPanel.getCols()+", "+gridPanel.getRows()+")");
-	}
-
-
-	/**
-	 * REFACTORING...
-	 */
-	private void resized() {
-		
-		lblCells.setText("Grid("+gridPanel.getCols()+", "+gridPanel.getRows()+")");
-		
-		int threads = gridPanel.getCols()*gridPanel.getRows();
-		Integer[] arrayThreads = new Integer[threads];
-		for (int i = 0; i < threads; i++) {
-			arrayThreads[i]=i+1;
-		}
-		threadBox.setModel(new DefaultComboBoxModel<Integer>(arrayThreads));
-
-		repaint();
-		
-	}
 }

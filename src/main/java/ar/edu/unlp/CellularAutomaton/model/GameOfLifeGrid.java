@@ -1,8 +1,11 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
 import java.util.Enumeration;
+import java.util.Observable;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 import ar.edu.unlp.CellularAutomaton.exception.ShapeException;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
@@ -13,6 +16,7 @@ public class GameOfLifeGrid {
 	private int cols;
 	private int rows;
 	private GameOfLifeCell[][] cells;
+	private ManagerOfThreads managerOfThreads;
 
 	public GameOfLifeGrid(int cols, int rows) {
 		super();
@@ -20,6 +24,7 @@ public class GameOfLifeGrid {
 		this.cols = cols;
 		this.rows = rows;
 		cells = new GameOfLifeCell[cols][rows];
+		managerOfThreads = new ManagerOfThreads(200, 1);
 		
 		//initialize the grid with cells
 		for (int row = 0; row < rows; row++) {
@@ -61,7 +66,7 @@ public class GameOfLifeGrid {
 				countAliveNeighbors(col,row);
 			}
 		}
-		
+
 		//Transition Function
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
@@ -72,145 +77,139 @@ public class GameOfLifeGrid {
 		generation++;
 	}
 	
-	
-	public synchronized void nextGeneration2(){
-		
-		final CyclicBarrier countAliveNeighborsBarrier = new CyclicBarrier(2);
-		final CyclicBarrier transitionFunctionBarrier = new CyclicBarrier(2);
-		
-		Thread hilo1 = new Thread() {
-            public void run() {
-            	for (int i = 0; i < 10; i++) {
-					
-	        		//count alive neighbors
-	        		for (int row = 0; row < rows/2; row++) {
-	        			for (int col = 0; col < cols; col++) {
-	        				countAliveNeighbors(col,row);
-	        			}
-	        		}
-	        		try {countAliveNeighborsBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-	        		
-	        		//Transition Function
-	        		for (int row = 0; row < rows/2; row++) {
-	        			for (int col = 0; col < cols; col++) {
-	        				cells[col][row].transitionFunction();	
-	        			}
-	        		}
-	        		try {transitionFunctionBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-				}
-            }
-		};
-		
-		Thread hilo2 = new Thread() {
-            public void run() {
-            	for (int i = 0; i < 10; i++) {
-            		
-	        		//count alive neighbors
-	        		for (int row = rows/2; row < rows; row++) {
-	        			for (int col = 0; col < cols; col++) {
-	        				countAliveNeighbors(col,row);
-	        			}
-	        		}
-	        		try {countAliveNeighborsBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-	        		
-	        		//Transition Function
-	        		for (int row = rows/2; row < rows; row++) {
-	        			for (int col = 0; col < cols; col++) {
-	        				cells[col][row].transitionFunction();	
-	        			}
-	        		}
-	        		try {transitionFunctionBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-            	}
-            }
-		};
-		
-//		Thread hilo3 = new Thread() {
-//            public void run() {
-//            	try {countAliveNeighborsBarrier.await();
-//        		for (int row = 0; row < rows/2; row++) {
-//        			for (int col = 0; col < cols; col++) {
-//        				cells[col][row].transitionFunction();
-//        			}
-//        		}
-//        		transitionFunctionBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-//            }
-//		};
-//		
-//		Thread hilo4 = new Thread() {
-//            public void run() {
-//            	try {countAliveNeighborsBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-//        		for (int row = rows/2; row < rows; row++) {
-//        			for (int col = 0; col < cols; col++) {
-//        				cells[col][row].transitionFunction();
-//        			}
-//        		}
-//        		try {transitionFunctionBarrier.await();} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
-//            }
-//		};
-		
-		hilo1.start();
-		hilo2.start();
-//		hilo3.start();
-//		hilo4.start();
+
+	public ManagerOfThreads getManagerOfThreads() {
+		return managerOfThreads;
+	}
 
 
-		generation++;
+	public ManagerOfThreads newManagerOfThreads(final int speedTime, int numOfThreads){
+		return managerOfThreads = new ManagerOfThreads(speedTime,numOfThreads);
+		
 	}
-	
-	/**
-	 * Ejecuta un pedazo de la sigiente generación de la matriz
-	 *
-	 */
-	public Worker getWorker(int firstRow, int firstCol, int lastRow, int lastCol,CyclicBarrier countAliveNeighborsBarrier,CyclicBarrier transitionFunctionBarrier){
-		return new Worker(firstRow, firstCol, lastRow, lastCol,countAliveNeighborsBarrier,transitionFunctionBarrier);
-	}
-	
-	public class Worker implements Runnable{
-		private int firstRow;
-		private int firstCol;
-		private int lastRow;
-		private int lastCol;
+
+	public class ManagerOfThreads extends Observable{
+		private boolean done,barrierDone,paused,pausedDone;
+		private int sleepTime;
+		private int numOfThreads;
+		private Thread[] threads;
+		private ReentrantLock pauseLock = new ReentrantLock();
+		private Condition unpaused = pauseLock.newCondition();
 		private CyclicBarrier countAliveNeighborsBarrier;
 		private CyclicBarrier transitionFunctionBarrier;
-
-		public Worker(){}
 		
-		public Worker(int firstRow, int firstCol, int lastRow, int lastCol,CyclicBarrier countAliveNeighborsBarrier,CyclicBarrier transitionFunctionBarrier) {
-			super();
-			this.firstRow = firstRow;
-			this.firstCol = firstCol;
-			this.lastRow = lastRow;
-			this.lastCol = lastCol;
-			this.countAliveNeighborsBarrier = countAliveNeighborsBarrier;
-			this.transitionFunctionBarrier = transitionFunctionBarrier;
+		
+		public class Worker implements Runnable{
+			private int currentThread;
+			
+			public Worker(int currentThread) {
+				super();
+				this.currentThread = currentThread;
+			}
+
+			@Override
+			public  void run() {
+				while (!barrierDone) {
+					try {
+						if(pausedDone) {
+							pauseLock.lock();
+							unpaused.await();
+							pauseLock.unlock();}
+						else {
+							countAliveNeighborsMatrix(numOfThreads, currentThread);
+							countAliveNeighborsBarrier.await();//CyclicBarrier await
+
+							transitionFuncionMatrix(numOfThreads, currentThread);
+							transitionFunctionBarrier.await();//CyclicBarrier await
+						}
+
+					
+					} catch (InterruptedException | BrokenBarrierException e) {e.printStackTrace();}
+				}
+			}
 		}
 
-		@Override
-		public void run() {
+		public class BarrierAction implements Runnable {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(sleepTime);
+					generation++;
+					setChanged();
+					notifyObservers();
+					//finish the loop and paused threads
+					if (done == true)
+						barrierDone = true;
+					else if (paused == true){
+						pausedDone = true;
+					}
+						
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		public ManagerOfThreads(final int sleepTime, int numOfThreads) {
+			super();
+			this.done = false;
+			this.barrierDone = false;
+			this.paused = false;
+			this.pausedDone = false;
+			
+			this.sleepTime = sleepTime;
+			this.numOfThreads = numOfThreads;
+			this.countAliveNeighborsBarrier = new CyclicBarrier(numOfThreads);
+			this.transitionFunctionBarrier = new CyclicBarrier(numOfThreads,new BarrierAction());
+		}
+
+		public synchronized void setSleepTime(int sleepTime) {
+			this.sleepTime = sleepTime;
+		}
+		
+		public synchronized void setNumOfThreads(int numOfThreads) {
+			this.numOfThreads = numOfThreads;
+			this.countAliveNeighborsBarrier = new CyclicBarrier(numOfThreads);
+			this.transitionFunctionBarrier = new CyclicBarrier(numOfThreads,new BarrierAction());
+		}
+		
+		public synchronized void start(){
+			threads = new Thread[numOfThreads];
+			for (int t = 0; t < numOfThreads; t++) {
+				threads[t] = new Thread(new Worker(t),"thread: "+t);
+				threads[t].start();
+			}
+		}
+
+		public synchronized void stop() {
+			done = true;
+		}
+		
+		public void pause() {
+			pauseLock.lock();
 			try {
-				//count alive neighbors
-				for (int row = firstRow; row < lastRow; row++) {
-					for (int col = firstCol; col < lastCol; col++) {
-						countAliveNeighbors(col,row);
-					}
-				}
-				countAliveNeighborsBarrier.await(); //CyclicBarrier await
-				System.out.println("paso");
-				//Transition Function
-				for (int row = firstRow; row < lastRow; row++) {
-					for (int col = firstCol; col < lastCol; col++) {
-						cells[col][row].transitionFunction();	
-					}
-				}
-				transitionFunctionBarrier.await(); //CyclicBarrier await
-				
-			} catch (InterruptedException | BrokenBarrierException e) {
-				e.printStackTrace();
+				paused = true;
+			} finally {
+				pauseLock.unlock();
+			}
+		}
+		
+		public void resume() {
+			pauseLock.lock();
+			try {
+				paused = false;
+				pausedDone = false;
+				unpaused.signalAll();
+			} finally {
+				pauseLock.unlock();
 			}
 		}
 	}
+
 	
-	public void countAliveNeighbors(final int col, final int row){
+	private void countAliveNeighbors(final int col, final int row){
 		cells[col][row].setAliveNeighbors((byte) 0);
 		try{cells[col][row].addAliveNeighbor(cells[col-1][row-1]);}catch(ArrayIndexOutOfBoundsException e){}
 		try{cells[col][row].addAliveNeighbor(cells[col-1][row]);}catch(ArrayIndexOutOfBoundsException e){}
@@ -229,7 +228,7 @@ public class GameOfLifeGrid {
 	 * @param rows of grid
 	 */
 	public synchronized void resize(int width, int height) {
-		
+		getManagerOfThreads().pause();
 	    // Copy existing shape to center of new shape
 //	    int colOffset = (cols-this.width)/2;
 //	    int rowOffset = (rows-this.height)/2;
@@ -250,6 +249,8 @@ public class GameOfLifeGrid {
 		cells = NewCells;
 		this.cols = width;
 		this.rows = height;
+		
+		getManagerOfThreads().resume();
 	}
 
 
@@ -296,9 +297,101 @@ public class GameOfLifeGrid {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString(){
 		return "Grid("+cols+", "+rows+")";
 	}
+	
+	
+	private void countAliveNeighborsMatrix(int numOfThreads, int currentThread ){
+		
+		int threads = numOfThreads;
+		int free = getRows() % threads;
+		int firstRow=0;
+		int firstCol=0;
+		int lastRow;
+		int lastCol=getCols();
+		System.out.println(free);
+		int freefirstRow = 0;
+		int freelastRow = 0;
+		
+//		if(free>0)freelastRow++;
 
+		int t = currentThread;
 
+			
+
+			System.out.println("free:"+free+" freefirstRow:"+freefirstRow+" freelastRow:"+freelastRow);
+			
+			firstRow = ((getRows() / threads) * t) + freefirstRow;
+			firstCol = 0;
+			lastRow = ((getRows() / threads) * (t + 1)) + freelastRow;
+			lastCol = getCols();
+			
+			
+			for (int row = firstRow; row < lastRow; row++) {
+				for (int col = firstCol; col < lastCol; col++) {
+					countAliveNeighbors(col,row);
+//					try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
+//					cells[col][row].setColor(25000*(t+1));
+				}
+			}
+			
+			
+//			if(free>0){
+//				freefirstRow++;
+//				freelastRow++;
+//				free--;
+//			} if (free == 0 && (getRows() % threads) > 0) {
+//				freelastRow--;
+//				free--;}
+		
+	}
+	
+	private void transitionFuncionMatrix(int numOfThreads, int currentThread ){
+		
+		int threads = numOfThreads;
+		int free = getRows() % threads;
+		int firstRow=0;
+		int firstCol=0;
+		int lastRow;
+		int lastCol=getCols();
+		System.out.println(free);
+		int freefirstRow = 0;
+		int freelastRow = 0;
+		
+//		if(free>0)freelastRow++;
+
+		int t = currentThread;
+
+			
+
+			System.out.println("free:"+free+" freefirstRow:"+freefirstRow+" freelastRow:"+freelastRow);
+			
+			firstRow = ((getRows() / threads) * t) + freefirstRow;
+			firstCol = 0;
+			lastRow = ((getRows() / threads) * (t + 1)) + freelastRow;
+			lastCol = getCols();
+			
+			
+			for (int row = firstRow; row < lastRow; row++) {
+				for (int col = firstCol; col < lastCol; col++) {
+					cells[col][row].transitionFunction();
+//					try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
+//					cells[col][row].setColor(25000*(t+1));
+				}
+			}
+			
+			
+//			if(free>0){
+//				freefirstRow++;
+//				freelastRow++;
+//				free--;
+//			} if (free == 0 && (getRows() % threads) > 0) {
+//				freelastRow--;
+//				free--;}
+		
+	}
 }
