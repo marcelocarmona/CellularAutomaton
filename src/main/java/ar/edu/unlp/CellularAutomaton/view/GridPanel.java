@@ -10,8 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,7 +20,7 @@ import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
-public class GridPanel extends JPanel implements Observer {
+public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private GameOfLifeGrid grid;
@@ -151,12 +149,6 @@ public class GridPanel extends JPanel implements Observer {
 	 */
 	public GameOfLifeGrid getGrid() {
 		return grid;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		System.out.println("Observer funcionando");
-		repaint();
 	}
 
 }
