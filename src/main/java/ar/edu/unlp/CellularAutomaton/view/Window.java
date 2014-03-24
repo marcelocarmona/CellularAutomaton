@@ -33,6 +33,7 @@ import ar.edu.unlp.CellularAutomaton.util.CellSize;
 import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Vector;
 
 
 public class Window extends JFrame {
@@ -66,7 +67,7 @@ public class Window extends JFrame {
 		setTitle("Game Of Life");
 		setBounds(100, 100, 678, 352);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		//contentPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -86,8 +87,7 @@ public class Window extends JFrame {
 		});
 		
 		
-		//gridPanel <----------------------------------REFACTORING..........................
-		int cellsize = CellSize.values()[0].getValue();
+		//gridPanel
 		gridPanel = new GridPanel(20,20);
 		gridPanel.addGridPanelListener(new GridPanelListener() {
 			
@@ -97,11 +97,15 @@ public class Window extends JFrame {
 				lblCells.setText("Grid("+gridPanelEvent.getCols()+", "+gridPanelEvent.getRows()+")");
 				
 				int threads = gridPanelEvent.getRows();
-				Integer[] arrayThreads = new Integer[threads];
+				
+
+				//get multiples
+				Vector<Integer> vectorThreads = new Vector<>();
 				for (int i = 0; i < threads; i++) {
-					arrayThreads[i]=i+1;
+					if (threads % (i+1) == 0)
+						vectorThreads.add(i + 1);
 				}
-				threadBox.setModel(new DefaultComboBoxModel<Integer>(arrayThreads));
+				threadBox.setModel(new DefaultComboBoxModel<Integer>(vectorThreads));
 				
 			}
 		});
@@ -145,37 +149,14 @@ public class Window extends JFrame {
 		tglbtnStart.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					tglbtnStart.setText("Stop");
-					startManagerOfThreads();
-					btnNext.setEnabled(false);
-					shapeBox.setEnabled(false);
-					threadBox.setEnabled(false);
+					start();
 				} else {
-					tglbtnStart.setText("Start");
-					stopManagerOfThreads();
-					newManagerOfThreads();
-					btnNext.setEnabled(true);
-					shapeBox.setEnabled(true);
-					threadBox.setEnabled(true);
+					stop();
 				}
 			}
+
 		});
 		topPanel.add(tglbtnStart);
-		
-		
-		final JToggleButton tglbtnPause = new JToggleButton("Pause");
-		tglbtnPause.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					tglbtnPause.setText("Resume");
-					managerOfThreads.pause();
-				} else {
-					tglbtnPause.setText("Pause");
-					managerOfThreads.resume();
-				}
-			}
-		});
-		topPanel.add(tglbtnPause);
 		
 		
 		btnNext = new JButton("Next");
@@ -250,16 +231,13 @@ public class Window extends JFrame {
 	 * Create a Thread
 	 */
 	private void newManagerOfThreads(){
-//		startThread = new StartThread(this,getSpeedTime());
 		managerOfThreads = gridPanel.newManagerOfThreads(getSpeedTime(), getNumOfThreads());
 		managerOfThreads.addObserver(new Observer() {
 			
 			@Override
 			public void update(Observable o, Object arg) {
-				System.out.println("PROBANDOOOO");
 				gridPanel.repaint();
 				showGeneration();
-				
 			}
 		});
 	}
@@ -268,21 +246,37 @@ public class Window extends JFrame {
 	 * Start Thread
 	 */
 	private void startManagerOfThreads(){
-//		startThread.start();
-//		singleThread.start();
-//		singleThread2.start();
 		managerOfThreads.start();
 	}
+	
 	/**
 	 * Stop Thread
 	 */
 	private void stopManagerOfThreads(){
-//		startThread.finish();
-//		done =true;
-//		singleThread.finish();
-//		singleThread2.finish();
 		managerOfThreads.stop();
-		
+	}
+	
+	/**
+	 * Start actions
+	 */
+	private void start() {
+		tglbtnStart.setText("Stop");
+		startManagerOfThreads();
+		btnNext.setEnabled(false);
+		shapeBox.setEnabled(false);
+		threadBox.setEnabled(false);
+	}
+	
+	/**
+	 * Stop actions
+	 */
+	private void stop() {
+		tglbtnStart.setText("Start");
+		stopManagerOfThreads();
+		newManagerOfThreads();
+		btnNext.setEnabled(true);
+		shapeBox.setEnabled(true);
+		threadBox.setEnabled(true);
 	}
 	
 	/**
@@ -318,7 +312,4 @@ public class Window extends JFrame {
 	private void showAboutDialog(){
 		JOptionPane.showMessageDialog(this, "Game Of Life - Carmona Marcelo - 2014");
 	}
-	
-
-
 }

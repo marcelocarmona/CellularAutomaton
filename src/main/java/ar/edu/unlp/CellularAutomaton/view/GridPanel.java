@@ -3,18 +3,13 @@ package ar.edu.unlp.CellularAutomaton.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,7 +21,7 @@ import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid.ManagerOfThreads;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
-public class GridPanel extends JPanel implements Observer {
+public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private GameOfLifeGrid grid;
@@ -40,8 +35,6 @@ public class GridPanel extends JPanel implements Observer {
 	public GridPanel(final int rows, final int cols) {
 		
 		grid = new GameOfLifeGrid(cols, rows);
-
-		
 		listeners = new ArrayList<GridPanelListener>();
 		
 		setBackground(Color.LIGHT_GRAY);
@@ -49,17 +42,12 @@ public class GridPanel extends JPanel implements Observer {
 		addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent evt) {
-				grid.getManagerOfThreads().pause();
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
 				GameOfLifeCell cell = grid.getCell(cellX, cellY);
 				cell.switchState();
 				saveState = cell.getState();
 				repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				grid.getManagerOfThreads().resume();
 			}
 
 		});
@@ -115,14 +103,10 @@ public class GridPanel extends JPanel implements Observer {
 			for (int col = 0; col < grid.getCols(); col++) {
 				
 				g.setColor(new Color(grid.getCell(col, row).getColor()));
-//				g.fillOval(col * cellSize, row * cellSize, cellSize, cellSize);
 				g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				g.setColor(Color.BLACK);
 				g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
-//				g.drawOval(col * cellSize, row * cellSize, cellSize, cellSize);
 			}
-//			g.setColor(Color.ORANGE);
-//			g.drawString(grid.toString(),10,20);
 
 		}
 	}
@@ -157,19 +141,6 @@ public class GridPanel extends JPanel implements Observer {
 	
 	public ManagerOfThreads newManagerOfThreads(int speedTime, int numOfThreads){
 		return grid.newManagerOfThreads(speedTime, numOfThreads);
-	}
-
-	/**
-	 * creado para probar el thead concurrente
-	 */
-	public GameOfLifeGrid getGrid() {
-		return grid;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		System.out.println("Observer funcionando");
-		repaint();
 	}
 
 }

@@ -15,8 +15,6 @@ public interface CellState {
 	 * @return RGB color
 	 */
 	public int getColor();
-	public void setColor(int rGB);
-	
 	
 
 }
