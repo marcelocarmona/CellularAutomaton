@@ -1,7 +1,6 @@
 package ar.edu.unlp.CellularAutomaton;
 
-import ar.edu.unlp.CellularAutomaton.view.Window;
-import java.awt.EventQueue;
+import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
 
 
 /**
@@ -14,15 +13,16 @@ public class App
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Window frame = new Window();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		
+		int cols = Integer.valueOf(args[0]);
+		int rows = Integer.valueOf(args[1]);
+		int generations  = Integer.valueOf(args[2]);
+		
+		GameOfLifeGrid grid = new GameOfLifeGrid(cols, rows);
+		
+		for (int i = 0; i < generations; i++) {
+			grid.nextGeneration();
+			System.out.println(grid.getGeneration());
+		}
 	}
 }
