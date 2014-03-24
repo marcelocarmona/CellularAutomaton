@@ -1,6 +1,5 @@
 package ar.edu.unlp.CellularAutomaton.util;
 
-import java.awt.Dimension;
 import java.util.Enumeration;
 
 /**
@@ -29,25 +28,6 @@ public enum Shape {
     private Shape( String name, int[][] shape ) {
       this.name = name;
       this.shape = shape;
-    }
-    
-    /**
-     * Get dimension of shape.
-     * @return dimension of the shape in cells
-     */
-    @Deprecated
-    public Dimension getDimension() {
-      int shapeWidth = 0;
-      int shapeHeight = 0;
-      for (int cell = 0; cell < shape.length; cell++) {
-        if (shape[cell][0] > shapeWidth)
-          shapeWidth = shape[cell][0];
-        if (shape[cell][1] > shapeHeight)
-          shapeHeight = shape[cell][1];
-      }
-      shapeWidth++;
-      shapeHeight++;
-      return new Dimension( shapeWidth, shapeHeight );
     }
     
     /**

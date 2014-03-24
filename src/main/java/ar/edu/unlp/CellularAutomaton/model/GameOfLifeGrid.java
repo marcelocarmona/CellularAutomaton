@@ -5,6 +5,10 @@ import java.util.Enumeration;
 import ar.edu.unlp.CellularAutomaton.exception.ShapeException;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
+/**
+ * Contains all the cells
+ * @author mclo
+ */
 public class GameOfLifeGrid {
 	
 	private int generation;
@@ -12,6 +16,11 @@ public class GameOfLifeGrid {
 	private int rows;
 	private GameOfLifeCell[][] cells;
 
+	/**
+	 * Constructor
+	 * @param col matrix's column
+	 * @param row matrix's row
+	 */
 	public GameOfLifeGrid(int cols, int rows) {
 		super();
 		generation = 0;
@@ -26,24 +35,33 @@ public class GameOfLifeGrid {
 			}
 		}
 	}
-	
-	public GameOfLifeGrid() {
-		generation = 0;
-		//resize is executing
-	}
 
+	/**
+	 * @return number of columns
+	 */
 	public int getCols(){
 		return cols;
 	}
 	
+	/**
+	 * @return number of rows
+	 */
 	public int getRows(){
 		return rows;
 	}
 	
+	/**
+	 * @return current generation
+	 */
 	public int getGeneration() {
 		return generation;
 	}
 
+	/**
+	 * @param col matrix's column
+	 * @param row matrix's row
+	 * @return a gameOfLifeCell
+	 */
 	public GameOfLifeCell getCell(int col, int row){
 		return cells[col][row];
 	}
@@ -70,6 +88,11 @@ public class GameOfLifeGrid {
 		generation++;
 	}
 
+	/**
+	 * neighbors alive in the neighborhood
+	 * @param col matrix's column
+	 * @param row matrix's row
+	 */
 	private void countAliveNeighbors(final int col, final int row){
 		cells[col][row].setAliveNeighbors((byte) 0);
 		try{cells[col][row].addAliveNeighbor(cells[col-1][row-1]);}catch(ArrayIndexOutOfBoundsException e){}

@@ -20,28 +20,31 @@ import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
+/**
+ * Draw and render the matrix
+ * @author mclo
+ */
 public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private GameOfLifeGrid grid;
-	private int cellSize = 20;
+	private int cellSize;
 	private CellState saveState;
 	private List<GridPanelListener>listeners;
 
 	/**
 	 * Create the GridPanel.
 	 */
-	public GridPanel(final int rows, final int cols) {
+	public GridPanel(final int rows, final int cols,final int size) {
 		
 		grid = new GameOfLifeGrid(cols, rows);
-
+		this.cellSize = size;
 		
 		listeners = new ArrayList<GridPanelListener>();
 		
 		setBackground(Color.LIGHT_GRAY);
 		
 		addMouseListener(new MouseAdapter() {
-			
 			public void mousePressed(MouseEvent evt) {
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
@@ -50,7 +53,6 @@ public class GridPanel extends JPanel {
 				saveState = cell.getState();
 				repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
 			}
-
 		});
 		
 	    addMouseMotionListener(new MouseMotionAdapter() {
@@ -67,8 +69,6 @@ public class GridPanel extends JPanel {
 				resized();
 			}
 		});
-
-
 	}
 	
 	/**
@@ -79,14 +79,31 @@ public class GridPanel extends JPanel {
 		listeners.add(listener);
 	}
 
+	/**
+	 * next generation of the grid
+	 */
 	public void nextGeneration() {
 		grid.nextGeneration();
 	}
 	
+	/**
+	 * @param value cell's size
+	 */
+	public void setCellSize(int value) {
+		cellSize = value;
+		resized();
+	}
+	
+	/**
+	 * @return number of generation
+	 */
 	public String getGeneration(){
 		return Integer.toString(grid.getGeneration());
 	}
 
+	/**
+	 * @param shape loaded in the grid
+	 */
 	public void loadShape(Shape shape) {		
 		try {
 			grid.loadShape(shape);
@@ -95,60 +112,39 @@ public class GridPanel extends JPanel {
 		}
 	}
 
-
-	@Override
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		super.paint(g);
 		
 		for (int row = 0; row < grid.getRows(); row++) {
-			for (int col = 0; col < grid.getCols(); col++) {
-				
+			for (int col = 0; col < grid.getCols(); col++) {	
 				g.setColor(new Color(grid.getCell(col, row).getColor()));
-//				g.fillOval(col * cellSize, row * cellSize, cellSize, cellSize);
 				g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 				g.setColor(Color.BLACK);
 				g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
-//				g.drawOval(col * cellSize, row * cellSize, cellSize, cellSize);
 			}
-//			g.setColor(Color.ORANGE);
-//			g.drawString(grid.toString(),10,20);
 
 		}
 	}
 
+	/**
+	 * resize the grid
+	 */
 	public void resized() {
 		int cols = getWidth() / cellSize;
 		int rows = getHeight() / cellSize;
 		if (cols != grid.getCols() || rows != grid.getRows()){
 			grid.resize(cols, rows);
-
 			repaint();
 			
+			//listener event
 			GridPanelEvent gridPanelEvent = GridPanelEvent.getSizeChangedEvent(this, grid.getCols(), grid.getRows());
 			for (GridPanelListener listener : listeners) {
 				listener.sizeChanged(gridPanelEvent);
 			}
 		}
-	}
-
-	public void setCellSize(int value) {
-		cellSize = value;
-		resized();
-	}
-
-	public int getCols() {
-		return grid.getCols();
-	}
-
-	public int getRows() {
-		return grid.getRows();
-	}
-
-	/**
-	 * creado para probar el thead concurrente
-	 */
-	public GameOfLifeGrid getGrid() {
-		return grid;
 	}
 
 }

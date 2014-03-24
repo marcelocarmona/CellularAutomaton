@@ -2,7 +2,6 @@ package ar.edu.unlp.CellularAutomaton.exception;
 
 /**
  * Exeption for Shape too big
- * 
  * @author mclo
  */
 public class ShapeException extends Exception {

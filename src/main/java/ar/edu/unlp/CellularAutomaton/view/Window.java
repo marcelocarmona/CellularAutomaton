@@ -31,6 +31,10 @@ import ar.edu.unlp.CellularAutomaton.util.StartThread;
 import java.awt.Color;
 
 
+/**
+ * Main window contains a gridPanel
+ * @author mclo
+ */
 public class Window extends JFrame {
 
 
@@ -69,7 +73,7 @@ public class Window extends JFrame {
 		
 		
 		//gridPanel
-		gridPanel = new GridPanel(20,20);
+		gridPanel = new GridPanel(20,20,20);
 		gridPanel.addGridPanelListener(new GridPanelListener() {
 			
 			@Override
@@ -87,7 +91,7 @@ public class Window extends JFrame {
 		bottomPanel.setBackground(new Color(255, 250, 205));
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
 		
-		lblCells = new JLabel("Grid("+gridPanel.getCols()+", "+gridPanel.getRows()+")");
+		lblCells = new JLabel();
 		bottomPanel.add(lblCells);
 		
 		JLabel lblGenerations = new JLabel("Generations:");
@@ -205,6 +209,7 @@ public class Window extends JFrame {
 	private void startManagerOfThreads(){
 		managerOfThreads.start();
 	}
+	
 	/**
 	 * Stop Thread
 	 */

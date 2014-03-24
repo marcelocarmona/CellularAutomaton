@@ -5,10 +5,8 @@ import java.awt.EventQueue;
 
 
 /**
- * @author mclo
- * 
  * Main Class
- *
+ * @author mclo
  */
 public class App 
 {
