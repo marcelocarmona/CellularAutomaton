@@ -8,8 +8,13 @@ package ar.edu.unlp.CellularAutomaton.model;
  */
 public class GameOfLifeCell {
 	
-	public static CellState ALIVE = new Alive();
-	public static CellState DEAD = new Dead();
+	/**
+	 * States of cells 
+	 */
+	public static final CellState ALIVE = new Alive();
+	public static final CellState DEAD = new Dead();
+	public static final CellState[] STATES = {ALIVE, DEAD};
+
 
 	/**
 	 * Number of neighbors with alive state

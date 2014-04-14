@@ -94,15 +94,29 @@ public class GameOfLifeGrid {
 	 * @param row matrix's row
 	 */
 	private void countAliveNeighbors(final int col, final int row){
-		cells[col][row].setAliveNeighbors((byte) 0);
-		try{cells[col][row].addAliveNeighbor(cells[col-1][row-1]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col-1][row]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col-1][row+1]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col][row-1]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col][row+1]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col+1][row-1]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col+1][row]);}catch(ArrayIndexOutOfBoundsException e){}
-		try{cells[col][row].addAliveNeighbor(cells[col+1][row+1]);}catch(ArrayIndexOutOfBoundsException e){}
+		GameOfLifeCell cell = cells[col][row];
+		cell.setAliveNeighbors((byte) 0);
+		addAliveNeighbor(cell, col-1, row-1);
+		addAliveNeighbor(cell, col-1, row);
+		addAliveNeighbor(cell, col-1, row+1);
+		addAliveNeighbor(cell, col, row-1);
+		addAliveNeighbor(cell, col, row+1);
+		addAliveNeighbor(cell, col+1, row-1);
+		addAliveNeighbor(cell, col+1, row);
+		addAliveNeighbor(cell, col+1, row+1);
+	}
+	
+	/**
+	 * Add alive neighbor to the counter of cell
+	 * @param cell
+	 * @param neighborCell
+	 */
+	private void addAliveNeighbor(GameOfLifeCell cell, int col, int row){
+		try {
+			cell.addAliveNeighbor(cells[col][row]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			//ignore border of the grid
+		}
 	}
 	
 	/**
@@ -153,7 +167,7 @@ public class GameOfLifeGrid {
 		
 		//Shape Exception
 		if(cols < shape.getWidth() || rows < shape.getHeight())
-			throw new ShapeException("Shape doesn't fit on grid(grid: "+cols+"x"+rows+", shape: "+shape.getWidth()+"x"+shape.getHeight()+")");
+			throw new ShapeException("Shape doesn't fit on grid (grid: "+cols+"x"+rows+", shape: "+shape.getWidth()+"x"+shape.getHeight()+")");
 		
 		reset();
 		
@@ -164,7 +178,7 @@ public class GameOfLifeGrid {
 		//set shape
 		Enumeration<int[]> intCells = shape.getCells();
 		while (intCells.hasMoreElements()){
-			int[] elem= intCells.nextElement();
+			int[] elem = intCells.nextElement();
 	
 			int row = yOffset+elem[1];
 			int col = xOffset+elem[0];

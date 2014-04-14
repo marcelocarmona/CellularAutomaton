@@ -12,6 +12,8 @@ public class GridPanelEvent extends Event {
 	
 	private int cols;
 	private int rows;
+	private int cellSize;
+	private int generation;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +30,26 @@ public class GridPanelEvent extends Event {
 	 * @param target source of the event
 	 * @param cols number of columns
 	 * @param rows number of rows
+	 * @param cellSize number of pixels of the cell
 	 * @return new event object
 	 */
-	public static GridPanelEvent getSizeChangedEvent(Object target, int cols, int rows){
-		GridPanelEvent gridPanelEvent= new GridPanelEvent(target);
+	public static GridPanelEvent getSizeChangedEvent(Object target, int cols, int rows,int cellSize){
+		GridPanelEvent gridPanelEvent = new GridPanelEvent(target);
 		gridPanelEvent.setCols(cols);
 		gridPanelEvent.setRows(rows);
+		gridPanelEvent.setCellSize(cellSize);
+		return gridPanelEvent;
+	}
+	
+	/**
+	 * Constructs a event due to the generation changed.
+	 * @param target source of the event
+	 * @param generation number of generation
+	 * @return new event object
+	 */
+	public static GridPanelEvent getGenerationChangedEvent(Object target, int generation){
+		GridPanelEvent gridPanelEvent = new GridPanelEvent(target);
+		gridPanelEvent.setGeneration(generation);
 		return gridPanelEvent;
 	}
 
@@ -64,4 +80,33 @@ public class GridPanelEvent extends Event {
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+
+	/**
+	 * @return number of pixels of the cell
+	 */
+	public int getCellSize() {
+		return cellSize;
+	}
+
+	/**
+	 * @param cellSize number of pixels of the cell
+	 */
+	public void setCellSize(int cellSize) {
+		this.cellSize = cellSize;
+	}
+
+	/**
+	 * @return number of generation
+	 */
+	public int getGeneration() {
+		return generation;
+	}
+
+	/**
+	 * @param generation number of generation
+	 */
+	public void setGeneration(int generation) {
+		this.generation = generation;
+	}
+	
 }

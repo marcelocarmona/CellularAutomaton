@@ -14,4 +14,10 @@ public interface GridPanelListener extends EventListener {
 	 * @param gridPanelEvent event object
 	 */
 	public void sizeChanged(GridPanelEvent gridPanelEvent);
+
+	/**
+	 * The generation is changed
+	 * @param gridPanelEvent event object
+	 */
+	public void generationChanged(GridPanelEvent gridPanelEvent);
 }

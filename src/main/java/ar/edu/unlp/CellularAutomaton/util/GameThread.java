@@ -1,18 +1,22 @@
 package ar.edu.unlp.CellularAutomaton.util;
 
-import ar.edu.unlp.CellularAutomaton.view.Window;
+import ar.edu.unlp.CellularAutomaton.view.GridPanel;
 
-public class StartThread extends Thread {
+/**
+ * Thread that calls the next generation of the grid
+ * @author mclo
+ */
+public class GameThread extends Thread {
 
 	private volatile boolean done;
 	private int sleepTime;
-	private Window window;
+	private GridPanel gridPanel;
 
-	public StartThread(Window window, int sleepTime) {
+	public GameThread(GridPanel gridPanel, int sleepTime) {
 		super();
 		this.done = false;
 		this.sleepTime = sleepTime;
-		this.window = window;
+		this.gridPanel = gridPanel;
 	}
 
 	public void setSleepTime(int sleepTime) {
@@ -23,10 +27,9 @@ public class StartThread extends Thread {
 		done = true;
 	}
 
-	@Override
 	public void run() {
 		while (!done) {
-			window.nextGeneration();
+			gridPanel.nextGeneration();
 			try {
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {

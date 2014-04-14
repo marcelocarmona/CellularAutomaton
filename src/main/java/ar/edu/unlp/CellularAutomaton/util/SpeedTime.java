@@ -1,8 +1,8 @@
 package ar.edu.unlp.CellularAutomaton.util;
 
 /**
- * Speed time selected in the Window
- * @see Window
+ * Speed time selected in the GameFrame
+ * @see GameFrame
  * @author mclo
  */
 public enum SpeedTime {

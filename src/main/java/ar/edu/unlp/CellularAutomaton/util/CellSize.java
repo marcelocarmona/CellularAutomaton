@@ -1,8 +1,8 @@
 package ar.edu.unlp.CellularAutomaton.util;
 
 /**
- * Cell's size selected in the Window
- * @see Window
+ * Cell's size selected in the GameFrame
+ * @see GameFrame
  * @author mclo
  */
 public enum CellSize {

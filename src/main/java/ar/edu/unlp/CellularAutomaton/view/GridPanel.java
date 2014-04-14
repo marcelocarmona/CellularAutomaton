@@ -8,6 +8,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,45 +27,67 @@ import ar.edu.unlp.CellularAutomaton.util.Shape;
  * @author mclo
  */
 public class GridPanel extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * cell figures collection for to select the strategy to paint
+	 */
+	public static CellFigure[] CELL_FIGURES = {new SquareFigure(), new CircleFigure(), new TriangleFigure(), new RhombusFigure(), new HexagonFigure()};
+
 	private GameOfLifeGrid grid;
 	private int cellSize;
-	private CellState saveState;
+	private CellState mouseDraggedState;
+	private CellFigure cellFigure;
 	private List<GridPanelListener>listeners;
 
 	/**
 	 * Create the GridPanel.
 	 */
-	public GridPanel(final int rows, final int cols,final int size) {
+	public GridPanel(final int rows, final int cols,final int sizeOfCell) {
 		
 		grid = new GameOfLifeGrid(cols, rows);
-		this.cellSize = size;
+		this.cellSize = sizeOfCell;
+		cellFigure = CELL_FIGURES[0];
 		
 		listeners = new ArrayList<GridPanelListener>();
 		
-		setBackground(Color.LIGHT_GRAY);
-		
+		setBackground(Color.DARK_GRAY);
+
+		//mousePressed
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent evt) {
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
 				GameOfLifeCell cell = grid.getCell(cellX, cellY);
 				cell.switchState();
-				saveState = cell.getState();
-				repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
+				mouseDraggedState = cell.getState();
+				repaint(cellX*cellSize,cellY*cellSize,cellSize,cellSize);
 			}
 		});
 		
+		//mouseDragged
 	    addMouseMotionListener(new MouseMotionAdapter() {
 	        public void mouseDragged(MouseEvent evt) {
 				int cellX = evt.getX() / cellSize;
 				int cellY = evt.getY() / cellSize;
-	        	grid.getCell(cellX,cellY).setState(saveState);
-	        	repaint(cellX*cellSize,cellY*cellSize,cellX*cellSize+cellSize,cellY*cellSize+cellSize);
+	        	grid.getCell(cellX,cellY).setState(mouseDraggedState);
+	        	repaint(cellX*cellSize,cellY*cellSize,cellSize,cellSize);
 	        }
 	      });
+	    
+	    //mouseWheelMoved
+	    addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				int rotation = e.getWheelRotation();
+				if(cellSize+rotation >= 5 && cellSize+rotation <= 20){
+					cellSize+= rotation;
+					resized();
+				}
+			}
+		});
 
+	    //componentResized
 		addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				resized();
@@ -80,13 +104,6 @@ public class GridPanel extends JPanel {
 	}
 
 	/**
-	 * next generation of the grid
-	 */
-	public void nextGeneration() {
-		grid.nextGeneration();
-	}
-	
-	/**
 	 * @param value cell's size
 	 */
 	public void setCellSize(int value) {
@@ -100,6 +117,29 @@ public class GridPanel extends JPanel {
 	public String getGeneration(){
 		return Integer.toString(grid.getGeneration());
 	}
+	
+	/**
+	 * @param cellFigure cell figure eg. CircleFigure, SquareFigure, etc..
+	 */
+	public void setCellFigure(CellFigure cellFigure) {
+		this.cellFigure = cellFigure;
+		repaint();
+	}
+	
+	/**
+	 * next generation of the grid
+	 */
+	public void nextGeneration() {
+		grid.nextGeneration();
+		repaint();
+		
+		//listener event
+		GridPanelEvent gridPanelEvent = GridPanelEvent.getGenerationChangedEvent(this, grid.getGeneration());
+		for (GridPanelListener listener : listeners) {
+			listener.generationChanged(gridPanelEvent);
+		}
+		
+	}
 
 	/**
 	 * @param shape loaded in the grid
@@ -107,6 +147,14 @@ public class GridPanel extends JPanel {
 	public void loadShape(Shape shape) {		
 		try {
 			grid.loadShape(shape);
+			repaint();
+			
+			//listener event
+			GridPanelEvent gridPanelEvent = GridPanelEvent.getGenerationChangedEvent(this, grid.getGeneration());
+			for (GridPanelListener listener : listeners) {
+				listener.generationChanged(gridPanelEvent);
+			}
+			
 		} catch (ShapeException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 		}
@@ -117,13 +165,11 @@ public class GridPanel extends JPanel {
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);
-		
+
 		for (int row = 0; row < grid.getRows(); row++) {
 			for (int col = 0; col < grid.getCols(); col++) {	
 				g.setColor(new Color(grid.getCell(col, row).getColor()));
-				g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-				g.setColor(Color.BLACK);
-				g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
+				 cellFigure.paint(g,cellSize,col,row);
 			}
 
 		}
@@ -132,7 +178,7 @@ public class GridPanel extends JPanel {
 	/**
 	 * resize the grid
 	 */
-	public void resized() {
+	private void resized() {
 		int cols = getWidth() / cellSize;
 		int rows = getHeight() / cellSize;
 		if (cols != grid.getCols() || rows != grid.getRows()){
@@ -140,7 +186,7 @@ public class GridPanel extends JPanel {
 			repaint();
 			
 			//listener event
-			GridPanelEvent gridPanelEvent = GridPanelEvent.getSizeChangedEvent(this, grid.getCols(), grid.getRows());
+			GridPanelEvent gridPanelEvent = GridPanelEvent.getSizeChangedEvent(this, grid.getCols(), grid.getRows(), cellSize);
 			for (GridPanelListener listener : listeners) {
 				listener.sizeChanged(gridPanelEvent);
 			}

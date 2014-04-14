@@ -4,13 +4,18 @@ package ar.edu.unlp.CellularAutomaton.model;
  * Represents the alive state
  * @author mclo
  */
-public class Alive implements CellState {
+public class Alive extends AbstractState {
+
+	public Alive() {
+		setColor(0xffffff);
+		setArrayRule(new ArrayRule(2,3));
+	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#transitionFunction(ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell)
 	 */
 	public void transitionFunction(GameOfLifeCell cell) {
-		if (cell.getAliveNeighbors() < 2 || cell.getAliveNeighbors() > 3) {
+		if (!getArrayRule().include(cell.getAliveNeighbors())) {
 			switchState(cell);
 		}
 	}
@@ -27,13 +32,6 @@ public class Alive implements CellState {
 	 */
 	public void addAliveNeighbor(GameOfLifeCell cell) {
 		cell.addNeighbor();
-	}
-
-	/* (non-Javadoc)
-	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#getColor()
-	 */
-	public int getColor() {
-		return 0xffffff;
 	}
 
 	/* (non-Javadoc)
