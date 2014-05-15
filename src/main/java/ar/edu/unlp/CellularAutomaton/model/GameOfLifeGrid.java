@@ -9,12 +9,17 @@ import ar.edu.unlp.CellularAutomaton.util.Shape;
  * Contains all the cells
  * @author mclo
  */
-public class GameOfLifeGrid {
-	
+public class GameOfLifeGrid implements GameGrid {
+
 	private int generation;
 	private int cols;
 	private int rows;
 	private GameOfLifeCell[][] cells;
+	/**
+	 * used to define the neighborhood 
+	 * @see #countAliveNeighbors()
+	 */
+	private Neighborhood neighborhood;
 
 	/**
 	 * Constructor
@@ -27,6 +32,7 @@ public class GameOfLifeGrid {
 		this.cols = cols;
 		this.rows = rows;
 		cells = new GameOfLifeCell[cols][rows];
+		neighborhood = new Neighborhood();
 		
 		//initialize the grid with cells
 		for (int row = 0; row < rows; row++) {
@@ -35,40 +41,61 @@ public class GameOfLifeGrid {
 			}
 		}
 	}
+	
+	
 
-	/**
-	 * @return number of columns
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getCols()
 	 */
+	@Override
 	public int getCols(){
 		return cols;
 	}
 	
-	/**
-	 * @return number of rows
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getRows()
 	 */
+	@Override
 	public int getRows(){
 		return rows;
 	}
 	
-	/**
-	 * @return current generation
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getNeighborhood()
 	 */
+	@Override
+	public Neighborhood getNeighborhood() {
+		return neighborhood;
+	}
+
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#setNeighborhood(java.util.Set)
+	 */
+	@Override
+	public synchronized void setNeighborhood(Neighborhood neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getGeneration()
+	 */
+	@Override
 	public int getGeneration() {
 		return generation;
 	}
 
-	/**
-	 * @param col matrix's column
-	 * @param row matrix's row
-	 * @return a gameOfLifeCell
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getCell(int, int)
 	 */
+	@Override
 	public GameOfLifeCell getCell(int col, int row){
 		return cells[col][row];
 	}
 
-	/**
-	 * Create next generator of shape
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#nextGeneration()
 	 */
+	@Override
 	public synchronized void nextGeneration(){
 		
 		//count alive neighbors
@@ -95,15 +122,10 @@ public class GameOfLifeGrid {
 	 */
 	private void countAliveNeighbors(final int col, final int row){
 		GameOfLifeCell cell = cells[col][row];
-		cell.setAliveNeighbors((byte) 0);
-		addAliveNeighbor(cell, col-1, row-1);
-		addAliveNeighbor(cell, col-1, row);
-		addAliveNeighbor(cell, col-1, row+1);
-		addAliveNeighbor(cell, col, row-1);
-		addAliveNeighbor(cell, col, row+1);
-		addAliveNeighbor(cell, col+1, row-1);
-		addAliveNeighbor(cell, col+1, row);
-		addAliveNeighbor(cell, col+1, row+1);
+		cell.setAliveNeighbors(0);
+		for (Neighbor neighbor : neighborhood.getNeighbors()) {
+			addAliveNeighbor(cell, col+neighbor.getCol(), row+neighbor.getRow());
+		}
 	}
 	
 	/**
@@ -113,18 +135,21 @@ public class GameOfLifeGrid {
 	 */
 	private void addAliveNeighbor(GameOfLifeCell cell, int col, int row){
 		try {
-			cell.addAliveNeighbor(cells[col][row]);
+			cell.addAliveNeighbor(cells[ mod(col,cols)][mod(row,rows)]);
 		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println(col+", "+row);
 			//ignore border of the grid
 		}
 	}
 	
-	/**
-	 * Resize grid. Reuse existing cells.
-	 * 
-	 * @param cols of grid
-	 * @param rows of grid
+	private int mod(int i,int j){
+		return ((i % j) + j) % j;
+	}
+	
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#resize(int, int)
 	 */
+	@Override
 	public synchronized void resize(int width, int height) {
 				
 		// Create a new grid, reusing existing Cell's
@@ -145,9 +170,10 @@ public class GameOfLifeGrid {
 	}
 
 
-	/**
-	 * Reset the grid
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#reset()
 	 */
+	@Override
 	public synchronized void reset(){
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
@@ -158,11 +184,10 @@ public class GameOfLifeGrid {
 		generation=0;
 	}
 	
-	/**
-	 * Set shape in grid
-	 * @param shape name of shape
-	 * @throws ShapeException if shape does not fit on grid
+	/* (non-Javadoc)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#loadShape(ar.edu.unlp.CellularAutomaton.util.Shape)
 	 */
+	@Override
 	public synchronized void loadShape(Shape shape) throws ShapeException {
 		
 		//Shape Exception
@@ -187,10 +212,11 @@ public class GameOfLifeGrid {
 		}
 	}
 	
-	
+
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#toString()
 	 */
+	@Override
 	public String toString(){
 		return "Grid("+cols+", "+rows+")";
 	}

@@ -1,21 +1,22 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
+
 /**
  * Represents the dead state
  * @author mclo
  */
 public class Dead extends AbstractState {
 	
-	public Dead() {
+	public Dead(Rule rule) {
+		super(rule);
 		setColor(0x333333);
-		setArrayRule(new ArrayRule(3));
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#transitionFunction(ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell)
 	 */
 	public void transitionFunction(GameOfLifeCell cell) {
-		if (getArrayRule().include(cell.getAliveNeighbors())) {
+		if (getRule().include(cell.getAliveNeighbors())) {
 			switchState(cell);
 		}
 	}

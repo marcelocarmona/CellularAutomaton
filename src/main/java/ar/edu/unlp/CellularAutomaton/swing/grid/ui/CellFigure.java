@@ -1,11 +1,11 @@
-package ar.edu.unlp.CellularAutomaton.view;
+package ar.edu.unlp.CellularAutomaton.swing.grid.ui;
 
 import java.awt.Graphics;
 
 
 /**
  * Cell figure to paint in the PanelGrid
- * @see GridPanel
+ * @see JGrid
  * @author mclo
  */
 public interface CellFigure {

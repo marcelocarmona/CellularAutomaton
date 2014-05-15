@@ -1,6 +1,6 @@
 package ar.edu.unlp.CellularAutomaton.util;
 
-import ar.edu.unlp.CellularAutomaton.view.GridPanel;
+import ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel;
 
 /**
  * Thread that calls the next generation of the grid
@@ -10,13 +10,13 @@ public class GameThread extends Thread {
 
 	private volatile boolean done;
 	private int sleepTime;
-	private GridPanel gridPanel;
+	private GameGridModel gameGridModel;
 
-	public GameThread(GridPanel gridPanel, int sleepTime) {
+	public GameThread(GameGridModel gameGridModel, int sleepTime) {
 		super();
 		this.done = false;
 		this.sleepTime = sleepTime;
-		this.gridPanel = gridPanel;
+		this.gameGridModel = gameGridModel;
 	}
 
 	public void setSleepTime(int sleepTime) {
@@ -29,7 +29,7 @@ public class GameThread extends Thread {
 
 	public void run() {
 		while (!done) {
-			gridPanel.nextGeneration();
+			gameGridModel.nextGeneration();
 			try {
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {

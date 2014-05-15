@@ -1,6 +1,6 @@
 package ar.edu.unlp.CellularAutomaton;
 
-import ar.edu.unlp.CellularAutomaton.view.GameFrame;
+import ar.edu.unlp.CellularAutomaton.swing.GameFrame;
 
 import java.awt.EventQueue;
 
@@ -25,8 +25,11 @@ public class App
 				    JFrame.setDefaultLookAndFeelDecorated(true);
 				    JDialog.setDefaultLookAndFeelDecorated(true);
 				    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				    
+				    //create game
 					GameFrame frame = new GameFrame();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

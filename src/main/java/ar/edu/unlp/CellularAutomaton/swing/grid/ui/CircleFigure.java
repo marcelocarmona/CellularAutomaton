@@ -1,28 +1,28 @@
-package ar.edu.unlp.CellularAutomaton.view;
+package ar.edu.unlp.CellularAutomaton.swing.grid.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * Paints a cell like a square
+ * Paints a cell like a circle
  * @author mclo
  */
-public class SquareFigure implements CellFigure {
+public class CircleFigure implements CellFigure {
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.util.CellFigure#paint(java.awt.Graphics, int, int, int)
 	 */
 	public void paint(Graphics g, int cellSize, int col, int row) {
-		g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+		g.fillOval(col * cellSize, row * cellSize, cellSize, cellSize);
 		g.setColor(Color.BLACK);
-		g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
+		g.drawOval(col * cellSize, row * cellSize, cellSize, cellSize);
 	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "Square";
+		return "Circle";
 	}
 
 }

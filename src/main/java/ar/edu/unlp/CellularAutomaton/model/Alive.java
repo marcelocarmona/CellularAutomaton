@@ -1,21 +1,22 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
+
 /**
  * Represents the alive state
  * @author mclo
  */
 public class Alive extends AbstractState {
 
-	public Alive() {
+	public Alive(Rule rule) {
+		super(rule);
 		setColor(0xffffff);
-		setArrayRule(new ArrayRule(2,3));
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#transitionFunction(ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell)
 	 */
 	public void transitionFunction(GameOfLifeCell cell) {
-		if (!getArrayRule().include(cell.getAliveNeighbors())) {
+		if (!getRule().include(cell.getAliveNeighbors())) {
 			switchState(cell);
 		}
 	}

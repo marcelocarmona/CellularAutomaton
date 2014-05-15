@@ -11,16 +11,15 @@ public class GameOfLifeCell {
 	/**
 	 * States of cells 
 	 */
-	public static final CellState ALIVE = new Alive();
-	public static final CellState DEAD = new Dead();
+	public static final CellState ALIVE = new Alive(new Rule(8,"Survivals",2,3));
+	public static final CellState DEAD = new Dead(new Rule(8,"Births",3));
 	public static final CellState[] STATES = {ALIVE, DEAD};
-
-
+	
 	/**
 	 * Number of neighbors with alive state
 	 * Used to determines the next state
 	 */
-	private byte aliveNeighbors;
+	private int aliveNeighbors;
 	
 	
 	/**
@@ -40,14 +39,14 @@ public class GameOfLifeCell {
 	/**
 	 * @return number of alive neighbors
 	 */
-	public byte getAliveNeighbors() {
+	public int getAliveNeighbors() {
 		return aliveNeighbors;
 	}
 
 	/**
 	 * @param aliveNeighbors number of alive neighbors
 	 */
-	public void setAliveNeighbors(byte aliveNeighbors) {
+	public void setAliveNeighbors(int aliveNeighbors) {
 		this.aliveNeighbors = aliveNeighbors;
 	}
 
@@ -112,6 +111,6 @@ public class GameOfLifeCell {
 	 */
 	public String toString(){
 		return "Cell ["+state.toString()+" ,"
-					   +Byte.toString(aliveNeighbors)+"]";
+					   +Integer.toString(aliveNeighbors)+"]";
 	}
 }

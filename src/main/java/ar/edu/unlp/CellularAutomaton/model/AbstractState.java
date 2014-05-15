@@ -1,5 +1,6 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
+
 /**
  * Abtract state, getter and setter of rule and color
  * @see Alive
@@ -7,20 +8,29 @@ package ar.edu.unlp.CellularAutomaton.model;
  * @author mclo
  */
 public abstract class AbstractState implements CellState {
-	private ArrayRule rule;
+	private Rule rule;
 	private int color;
+ 
+	/**
+	 * Constructor
+	 * @param rule rule of the state
+	 */
+	public AbstractState(Rule rule) {
+		super();
+		this.rule = rule;
+	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#getRule()
 	 */
-	public ArrayRule getArrayRule() {
+	public Rule getRule() {
 		return rule;
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#setRule(ar.edu.unlp.CellularAutomaton.model.ArrayRule)
 	 */
-	public void setArrayRule(ArrayRule rule) {
+	public void setRule(Rule rule) {
 		this.rule = rule;
 	}
 

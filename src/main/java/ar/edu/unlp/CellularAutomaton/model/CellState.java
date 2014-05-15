@@ -1,5 +1,6 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
+
 /**
  * Cell's state
  * @see GameOfLifeCell
@@ -10,12 +11,12 @@ public interface CellState {
 	/**
 	 * @return the rule to change state
 	 */
-	public ArrayRule getArrayRule();
+	public Rule getRule();
 
 	/**
 	 * @param rule the rule to change state
 	 */
-	public void setArrayRule(ArrayRule arrayRule);
+	public void setRule(Rule rule);
 
 	/**
 	 * @return RGB color

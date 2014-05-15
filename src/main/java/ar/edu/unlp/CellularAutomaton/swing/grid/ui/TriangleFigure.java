@@ -1,4 +1,4 @@
-package ar.edu.unlp.CellularAutomaton.view;
+package ar.edu.unlp.CellularAutomaton.swing.grid.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
