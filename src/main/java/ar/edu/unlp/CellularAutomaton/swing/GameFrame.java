@@ -25,9 +25,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 
 import ar.edu.unlp.CellularAutomaton.exception.ShapeException;
+import ar.edu.unlp.CellularAutomaton.model.Alive;
 import ar.edu.unlp.CellularAutomaton.model.CellState;
+import ar.edu.unlp.CellularAutomaton.model.Dead;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
+import ar.edu.unlp.CellularAutomaton.model.Neighborhood;
+import ar.edu.unlp.CellularAutomaton.model.Rule;
+import ar.edu.unlp.CellularAutomaton.model.StateRuleImpl;
+import ar.edu.unlp.CellularAutomaton.swing.checkList.RuleCheckListModel;
 import ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel;
 import ar.edu.unlp.CellularAutomaton.swing.grid.GridListener;
 import ar.edu.unlp.CellularAutomaton.swing.grid.JGrid;
@@ -91,10 +97,18 @@ public class GameFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		//initialize decorator state rule
+		GameOfLifeCell.ALIVE.setStateRule(new RuleCheckListModel(GameOfLifeCell.ALIVE.getStateRule()));
+		GameOfLifeCell.DEAD.setStateRule(new RuleCheckListModel(GameOfLifeCell.DEAD.getStateRule()));
 
 		// gridComponent
 		GameGridModel gameGridModel = new GameGridModel(
-				new GameOfLifeGrid(5, 5));
+				new GameOfLifeGrid(5, 5, new Rule(	"Life", 
+													"Conway's Game of Life", 
+													Neighborhood.MOORE,
+													GameOfLifeCell.ALIVE, 
+													GameOfLifeCell.DEAD)));
 		gridComponent = new JGrid(gameGridModel);
 		gridComponent.getModel().addGridListener(new GridListener() {
 
@@ -219,6 +233,8 @@ public class GameFrame extends JFrame {
 		topPanel.add(speedBox);
 
 		cellColorBox = new JComboBox<CellState>();
+		cellColorBox.setModel(new DefaultComboBoxModel<CellState>(
+				GameOfLifeCell.STATES));
 		cellColorBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CellState cellSate = (CellState) cellColorBox.getSelectedItem();
@@ -230,8 +246,6 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
-		cellColorBox.setModel(new DefaultComboBoxModel<CellState>(
-				GameOfLifeCell.STATES));
 		topPanel.add(cellColorBox);
 
 		cellFigureBox = new JComboBox<CellFigures>();

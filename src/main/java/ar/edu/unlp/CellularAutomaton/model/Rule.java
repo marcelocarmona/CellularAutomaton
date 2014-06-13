@@ -1,20 +1,24 @@
 package ar.edu.unlp.CellularAutomaton.model;
 
+import java.util.Set;
+
 public class Rule {
+
+	
 	private String name;
 	private String description;
 	private Neighborhood neighborhood;
-	private StateRule aliveStateRule;
-	private StateRule deadStateRule;
+	private CellState aliveState;
+	private CellState deadState;
 	
 	public Rule(String name, String description, Neighborhood neighborhood,
-			StateRule aliveStateRule, StateRule deadStateRule) {
+			CellState aliveState, CellState deadState) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.neighborhood = neighborhood;
-		this.aliveStateRule = aliveStateRule;
-		this.deadStateRule = deadStateRule;
+		this.aliveState = aliveState;
+		this.deadState = deadState;
 	}
 	public String getName() {
 		return name;
@@ -34,29 +38,49 @@ public class Rule {
 	public void setNeighborhood(Neighborhood neighborhood) {
 		this.neighborhood = neighborhood;
 	}
-	public StateRule getAliveStateRule() {
-		return aliveStateRule;
+	public CellState getAliveState() {
+		return aliveState;
 	}
-	public void setAliveStateRule(StateRule aliveStateRule) {
-		this.aliveStateRule = aliveStateRule;
+	public void setAliveStateRule(CellState aliveStateRule) {
+		this.aliveState = aliveStateRule;
 	}
-	public StateRule getDeadStateRule() {
-		return deadStateRule;
+	public CellState getDeadState() {
+		return deadState;
 	}
-	public void setDeadStateRule(StateRule deadStateRule) {
-		this.deadStateRule = deadStateRule;
+	public void setDeadStateRule(CellState deadStateRule) {
+		this.deadState = deadStateRule;
 	}
 	
-	public void addNeighbor(int col, int row){
+	public synchronized void addNeighbor(int col, int row){
 		neighborhood.add(col, row);
-		aliveStateRule.addLast();
-		deadStateRule.addLast();
+		aliveState.getStateRule().addLast();
+		deadState.getStateRule().addLast();
 	}
 	
-	public void removeNeighbor(int col, int row){
+	public synchronized void removeNeighbor(int col, int row){
 		neighborhood.remove(col, row);
-		aliveStateRule.removeLast();
-		deadStateRule.removeLast();
+		aliveState.getStateRule().removeLast();
+		deadState.getStateRule().removeLast();
 	}
+	public synchronized  Set<Neighbor> getNeighbors() {
+		return neighborhood.getNeighbors();
+	}
+	@Override
+	public String toString() {
+		return "Rule [name=" + name + ", description=" + description
+				+ ", neighborhood=" + neighborhood + ", aliveState="
+				+ aliveState + ", deadState=" + deadState + "]";
+	}
+	public void loadNeighborhood(Neighborhood neighborhood2) {
+		neighborhood.getNeighbors().clear();
+		for (Neighbor n : neighborhood.getNeighbors()) {
+			neighborhood.getNeighbors().add(n);
+		}
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 
 }

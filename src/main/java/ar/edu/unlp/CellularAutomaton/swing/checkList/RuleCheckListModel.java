@@ -100,6 +100,10 @@ public class RuleCheckListModel extends AbstractListModel<RuleValue> implements 
 	public boolean include(int numberOfNeighbor) {
 		return this.rule.include(numberOfNeighbor);
 	}
+	
+	public String toString(){
+		return this.rule.toString();
+	}
 
 	
 };

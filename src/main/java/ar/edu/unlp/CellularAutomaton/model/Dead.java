@@ -16,7 +16,7 @@ public class Dead extends AbstractState {
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#transitionFunction(ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell)
 	 */
 	public void transitionFunction(GameOfLifeCell cell) {
-		if (getRule().include(cell.getAliveNeighbors())) {
+		if (getStateRule().include(cell.getAliveNeighbors())) {
 			switchState(cell);
 		}
 	}
@@ -34,12 +34,10 @@ public class Dead extends AbstractState {
 	public void addAliveNeighbor(GameOfLifeCell gameOfLifeCell) {
 		// this state is dead, not add
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
+	
+	public String toString(){
 		return "Dead";
 	}
+
 
 }

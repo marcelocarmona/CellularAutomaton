@@ -7,6 +7,7 @@ import ar.edu.unlp.CellularAutomaton.model.CellState;
 import ar.edu.unlp.CellularAutomaton.model.GameGrid;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
 import ar.edu.unlp.CellularAutomaton.model.Neighborhood;
+import ar.edu.unlp.CellularAutomaton.model.Rule;
 import ar.edu.unlp.CellularAutomaton.util.Shape;
 
 /**
@@ -57,12 +58,12 @@ public class GameGridModel extends GridModel implements GameGrid {
 		return grid.getCols();
 	}
 
-	public Neighborhood getNeighborhood() {
-		return grid.getNeighborhood();
+	public Rule getRule() {
+		return grid.getRule();
 	}
 
-	public void setNeighborhood(Neighborhood neighborhood) {
-		grid.setNeighborhood(neighborhood);
+	public void setRule(Rule rule) {
+		grid.setRule(rule);
 		fireStateChanged();
 	}
 
@@ -90,8 +91,8 @@ public class GameGridModel extends GridModel implements GameGrid {
 	}
 
 	public void loadShape(Shape shape) throws ShapeException {
-			grid.loadShape(shape);
-			fireStateChanged();
+		grid.loadShape(shape);
+		fireStateChanged();
 	}
 
 

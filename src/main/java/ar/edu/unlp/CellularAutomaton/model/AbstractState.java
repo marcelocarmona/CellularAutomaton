@@ -2,36 +2,36 @@ package ar.edu.unlp.CellularAutomaton.model;
 
 
 /**
- * Abtract state, getter and setter of rule and color
+ * Abtract state, getter and setter of stateRule and color
  * @see Alive
  * @see Dead
  * @author mclo
  */
 public abstract class AbstractState implements CellState {
-	private StateRule rule;
+	private StateRule stateRule;
 	private int color;
  
 	/**
 	 * Constructor
-	 * @param rule rule of the state
+	 * @param stateRule stateRule of the state
 	 */
 	public AbstractState(StateRule rule) {
 		super();
-		this.rule = rule;
+		this.stateRule = rule;
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#getRule()
 	 */
-	public StateRule getRule() {
-		return rule;
+	public StateRule getStateRule() {
+		return stateRule;
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#setRule(ar.edu.unlp.CellularAutomaton.model.ArrayRule)
 	 */
-	public void setRule(StateRule rule) {
-		this.rule = rule;
+	public void setStateRule(StateRule rule) {
+		this.stateRule = rule;
 	}
 
 	/* (non-Javadoc)
@@ -46,6 +46,10 @@ public abstract class AbstractState implements CellState {
 	 */
 	public void setColor(int color) {
 		this.color = color;
+	}
+	
+	public String toString(){
+		return "["+this.getClass().getName()+" stateRule=["+stateRule+"]]";
 	}
 
 }

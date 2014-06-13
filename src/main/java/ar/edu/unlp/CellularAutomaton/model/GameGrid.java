@@ -16,14 +16,14 @@ public interface GameGrid {
 	public abstract int getRows();
 
 	/**
-	 * @return Set of Neighboors
+	 * @return get Rule
 	 */
-	public abstract Neighborhood getNeighborhood();
+	public abstract Rule getRule();
 
 	/**
-	 * @param neighborhood Set of Neighboors
+	 * @param rule Set rule
 	 */
-	public abstract void setNeighborhood(Neighborhood neighborhood);
+	public abstract void setRule(Rule rule);
 
 	/**
 	 * @return current generation
@@ -66,5 +66,6 @@ public interface GameGrid {
 	 * @see java.lang.Object#toString()
 	 */
 	public abstract String toString();
+
 
 }

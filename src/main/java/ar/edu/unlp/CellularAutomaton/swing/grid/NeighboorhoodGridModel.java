@@ -26,9 +26,8 @@ public class NeighboorhoodGridModel extends GridModel {
 	private NeighboorhoodState mouseDraggedState;
 	
 	/**
-	 * Models
+	 * Model
 	 */
-	private List<RuleCheckListModel> checkListModels = new ArrayList<>();
 	private GameGridModel gameGridModel;
 	
 	/**
@@ -40,9 +39,8 @@ public class NeighboorhoodGridModel extends GridModel {
 	
 	
 
-	public NeighboorhoodGridModel(List<RuleCheckListModel> checkListModels, GameGridModel gameGridModel) {
+	public NeighboorhoodGridModel(GameGridModel gameGridModel) {
 		super();
-		this.checkListModels = checkListModels;
 		this.gameGridModel = gameGridModel;
 		
 		// TODO Ver
@@ -120,7 +118,7 @@ public class NeighboorhoodGridModel extends GridModel {
 		}
 		
 		//initialize neighboors
-		for (Neighbor n : gameGridModel.getNeighborhood().getNeighbors()) {
+		for (Neighbor n : gameGridModel.getRule().getNeighbors()) {
 			neighborhoodGrid[center_col+n.getCol()][center_row+n.getRow()].setState(NEIGHBOOR_STATE);
 		}
 		
@@ -253,10 +251,8 @@ public class NeighboorhoodGridModel extends GridModel {
 		
 		public void switchState(Cell cell) {
 			cell.setState(NOT_NEIGHBOOR_STATE);
-			gameGridModel.getNeighborhood().remove(cell.getCol(), cell.getRow());
-			for (RuleCheckListModel checkListModel : checkListModels) {
-				checkListModel.removeLast();
-			}
+			//TODO MIRAR
+			gameGridModel.getRule().removeNeighbor(cell.getCol(), cell.getRow());
 		}
 
 	}
@@ -273,10 +269,8 @@ public class NeighboorhoodGridModel extends GridModel {
 		
 		public void switchState(Cell cell) {
 			cell.setState(NEIGHBOOR_STATE);	
-			gameGridModel.getNeighborhood().add(cell.getCol(), cell.getRow());
-			for (RuleCheckListModel checkListModel : checkListModels) {
-				checkListModel.addLast();
-			}
+			//TODO MIRAR
+			gameGridModel.getRule().addNeighbor(cell.getCol(), cell.getRow());
 		}
 
 	}

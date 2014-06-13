@@ -19,20 +19,21 @@ public class GameOfLifeGrid implements GameGrid {
 	 * used to define the neighborhood 
 	 * @see #countAliveNeighbors()
 	 */
-	private Neighborhood neighborhood;
+	private Rule rule;
 
 	/**
 	 * Constructor
 	 * @param col matrix's column
 	 * @param row matrix's row
 	 */
-	public GameOfLifeGrid(int cols, int rows) {
+	public GameOfLifeGrid(int cols, int rows,Rule rule) {
 		super();
-		generation = 0;
+		this.generation = 0;
 		this.cols = cols;
 		this.rows = rows;
+		this.rule = rule;
 		cells = new GameOfLifeCell[cols][rows];
-		neighborhood = new Neighborhood();
+		
 		
 		//initialize the grid with cells
 		for (int row = 0; row < rows; row++) {
@@ -61,19 +62,19 @@ public class GameOfLifeGrid implements GameGrid {
 	}
 	
 	/* (non-Javadoc)
-	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getNeighborhood()
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#getRule()
 	 */
 	@Override
-	public Neighborhood getNeighborhood() {
-		return neighborhood;
+	public Rule getRule() {
+		return rule;
 	}
 
 	/* (non-Javadoc)
-	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#setNeighborhood(java.util.Set)
+	 * @see ar.edu.unlp.CellularAutomaton.model.GameGrid#setRule(Rule rule)
 	 */
 	@Override
-	public synchronized void setNeighborhood(Neighborhood neighborhood) {
-		this.neighborhood = neighborhood;
+	public synchronized void setRule(Rule rule) {
+		this.rule = rule;
 	}
 
 	/* (non-Javadoc)
@@ -101,7 +102,7 @@ public class GameOfLifeGrid implements GameGrid {
 		//count alive neighbors
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				countAliveNeighbors(col,row);
+				countNeighbors(col,row);
 			}
 		}
 
@@ -116,24 +117,24 @@ public class GameOfLifeGrid implements GameGrid {
 	}
 
 	/**
-	 * neighbors alive in the neighborhood
+	 * count neighbors in the neighborhood
 	 * @param col matrix's column
 	 * @param row matrix's row
 	 */
-	private void countAliveNeighbors(final int col, final int row){
+	private void countNeighbors(final int col, final int row){
 		GameOfLifeCell cell = cells[col][row];
 		cell.setAliveNeighbors(0);
-		for (Neighbor neighbor : neighborhood.getNeighbors()) {
-			addAliveNeighbor(cell, col+neighbor.getCol(), row+neighbor.getRow());
+		for (Neighbor neighbor : rule.getNeighbors()) {
+			addNeighbor(cell, col+neighbor.getCol(), row+neighbor.getRow());
 		}
 	}
 	
 	/**
-	 * Add alive neighbor to the counter of cell
+	 * Add neighbor to the counter of cell
 	 * @param cell
 	 * @param neighborCell
 	 */
-	private void addAliveNeighbor(GameOfLifeCell cell, int col, int row){
+	private void addNeighbor(GameOfLifeCell cell, int col, int row){
 		try {
 			cell.addNeighbor(cells[ mod(col,cols)][mod(row, rows)]);
 		} catch (ArrayIndexOutOfBoundsException e) {

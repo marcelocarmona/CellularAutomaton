@@ -11,12 +11,12 @@ public interface CellState {
 	/**
 	 * @return the rule to change state
 	 */
-	public StateRule getRule();
+	public StateRule getStateRule();
 
 	/**
 	 * @param rule the rule to change state
 	 */
-	public void setRule(StateRule rule);
+	public void setStateRule(StateRule rule);
 
 	/**
 	 * @return RGB color

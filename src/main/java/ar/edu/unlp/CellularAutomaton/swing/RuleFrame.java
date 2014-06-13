@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -19,15 +21,26 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 
+import ar.edu.unlp.CellularAutomaton.model.Alive;
 import ar.edu.unlp.CellularAutomaton.model.CellState;
+import ar.edu.unlp.CellularAutomaton.model.Dead;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
-import ar.edu.unlp.CellularAutomaton.model.DefaultRules;
+import ar.edu.unlp.CellularAutomaton.model.Neighbor;
+import ar.edu.unlp.CellularAutomaton.model.Neighborhood;
+import ar.edu.unlp.CellularAutomaton.model.Rule;
 import ar.edu.unlp.CellularAutomaton.model.StateRule;
+import ar.edu.unlp.CellularAutomaton.model.StateRuleImpl;
 import ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList;
 import ar.edu.unlp.CellularAutomaton.swing.checkList.RuleCheckListModel;
 import ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel;
 import ar.edu.unlp.CellularAutomaton.swing.grid.JGrid;
 import ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel;
+
+
+
+
+
+
 
 
 
@@ -39,13 +52,57 @@ import java.awt.Insets;
 
 
 public class RuleFrame extends JFrame {
+	
+	public static Rule LIFE = new Rule(	"Life", 
+										"Conway's Game of Life", 
+										new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+										new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals", 2,3))), 
+										new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 3))));
+
+	public static Rule HIGHLIFE = new Rule(	"HighLife", 
+											"Very similar to Conway's Life but with an interesting replicator", 
+											new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+											new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals",  2,3))), 
+											new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 3,6))));
+	
+	
+	public static Rule DAY_AND_NIGHT = new Rule(	"Day & Night", 
+													"Dead cells in a sea of live cells behave the same as live cells in a sea of dead cells", 
+													new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+													new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals", 3,4,6,7,8))), 
+													new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 3,6,7,8)))); 
+	
+	public static Rule DIAMOEBA = new Rule(	"Diamoeba",
+											"Create diamond-shaped blobs with unpredictable behavior", 
+											new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+											new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals", 5,6,7,8 ))), 
+											new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 3,5,6,7,8))));
+	
+	public static Rule SEEDS = new Rule(	"Seeds", 
+											"Every living cell dies every generation, but most patterns still explode", 
+											new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+											new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals"))), 
+											new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 2))));
+	
+	public static Rule PERSIAN_RUG = new Rule(	"Persian Rug", 
+												"A single 2x2 block turns into a set of Persian rugs", 
+												new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+												new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals"))), 
+												new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births",  2,3,4))));
+	
+	public static Rule LONGLIFE =new Rule(	"LongLife",
+											"Oscillators with extremely long periods can occur quite naturally",  
+											new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))),
+											new Alive(new RuleCheckListModel(new StateRuleImpl(8,"Survivals", 5))), 
+											new Dead(new RuleCheckListModel(new StateRuleImpl(8,"Births", 3,4,5)))); 
+	
+	public static Rule[] RULES = {LIFE, HIGHLIFE, DAY_AND_NIGHT, DIAMOEBA, SEEDS, PERSIAN_RUG, LONGLIFE};
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable ruleDescriptorTable;
 	private JTextArea txtrDesxcription;
-	private List<RuleCheckListModel> listModels;
 	private NeighboorhoodGridModel neighboorhoodGridModel;
 
 	/**
@@ -79,14 +136,21 @@ public class RuleFrame extends JFrame {
 		
 		
 		//initialize lists models and NeighborhoodComponent
-		listModels = new ArrayList<RuleCheckListModel>();
-		for (CellState cellState : GameOfLifeCell.STATES) {
-			StateRule rule = cellState.getRule();
-			RuleCheckListModel ruleCheckListModel = new RuleCheckListModel(rule);
-			listModels.add(ruleCheckListModel);
-			JCheckList list = new JCheckList(ruleCheckListModel);
-			ruleCheckListPanel.add(list);
-		}
+//		listModels = new ArrayList<RuleCheckListModel>();
+//		for (CellState cellState : GameOfLifeCell.STATES) {
+//			StateRule rule = cellState.getRule();
+//			RuleCheckListModel ruleCheckListModel = new RuleCheckListModel(rule);
+//			listModels.add(ruleCheckListModel);
+//			JCheckList list = new JCheckList(ruleCheckListModel);
+//			ruleCheckListPanel.add(list);
+//		}
+		
+		
+		JCheckList aliveStateRuleList = new JCheckList((RuleCheckListModel) gameGridModel.getRule().getAliveState().getStateRule());
+		ruleCheckListPanel.add(aliveStateRuleList);
+		
+		JCheckList deadStateRuleList = new JCheckList((RuleCheckListModel) gameGridModel.getRule().getDeadState().getStateRule());
+		ruleCheckListPanel.add(deadStateRuleList);
 		
 		//create JGrid Panel
 		JPanel NeighborhoodComponentPanel = new JPanel();
@@ -95,7 +159,7 @@ public class RuleFrame extends JFrame {
 		contentPane.add(NeighborhoodComponentPanel);
 		
 		//create JGrid Panel
-		neighboorhoodGridModel = new NeighboorhoodGridModel(listModels,gameGridModel);
+		neighboorhoodGridModel = new NeighboorhoodGridModel(gameGridModel);
 		JGrid jGrid = new JGrid(neighboorhoodGridModel);
 
 
@@ -132,14 +196,27 @@ public class RuleFrame extends JFrame {
 				            int maxIndex = lsm.getMaxSelectionIndex();
 				            for (int i = minIndex; i <= maxIndex; i++) {
 				                if (lsm.isSelectedIndex(i)) {
-				                	DefaultRules ruleDescriptor = DefaultRules.values()[i];
-				                	txtrDesxcription.setText(ruleDescriptor.getDescription());
+				                	Rule rule = RULES[i];
+				                	txtrDesxcription.setText(rule.getDescription());
 						        	//Update neighboorhoodGridModel
+				                	
+
+//				                	gameGridModel.setRule(rule1);
+				                	
+				                	GameOfLifeCell.ALIVE.getStateRule().loadRule(rule.getAliveState().getStateRule());
+						        	GameOfLifeCell.DEAD.getStateRule().loadRule(rule.getDeadState().getStateRule());
+						        	gameGridModel.getRule().setNeighborhood(new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))));
 						        	
-						        	gameGridModel.setNeighborhood(ruleDescriptor.getNeighborhood());
+//						        	gameGridModel.setNeighborhood(rule.getNeighborhood());
+//						        	gameGridModel.getRule().setNeighborhood(rule.getNeighborhood());
+						        	
 						        	//Update StateRuleImpl
-						        	listModels.get(0).loadRule(ruleDescriptor.getAliveRule());
-						        	listModels.get(1).loadRule(ruleDescriptor.getDeadRule());
+//						        	GameOfLifeCell.ALIVE.getStateRule().loadRule(rule.getAliveRule());
+//						        	GameOfLifeCell.DEAD.getStateRule().loadRule(rule.getDeadRule());
+						        	
+//						        	listModels.get(0).loadRule(rule.getAliveRule());
+//						        	listModels.get(1).loadRule(rule.getDeadRule());
+						        	
 //						        	GameOfLifeCell.ALIVE.setRule(ruleDescriptor.getAliveRule());
 //						        	GameOfLifeCell.DEAD.setRule(ruleDescriptor.getDeadRule());
 						        	//TODO ARREGLAR
@@ -167,13 +244,13 @@ public class RuleFrame extends JFrame {
 							 value = rowIndex;
 						     break;
 						 case 1: 
-							 value = DefaultRules.values()[rowIndex].getName();
+							 value = RULES[rowIndex].getName();
 						     break;
 						 case 2: 
-							 value = DefaultRules.values()[rowIndex].getAliveRule().toString()+"/"+DefaultRules.values()[rowIndex].getDeadRule();
+							 value = RULES[rowIndex].getAliveState().getStateRule().toString()+"/"+RULES[rowIndex].getDeadState().getStateRule();
 						     break;
 						 case 3: 
-							 value = DefaultRules.values()[rowIndex].getDescription();
+							 value = RULES[rowIndex].getDescription();
 						}
 						return value;
 						
@@ -200,7 +277,7 @@ public class RuleFrame extends JFrame {
 
 					@Override
 					public int getRowCount() {
-						return DefaultRules.values().length;
+						return RULES.length;
 					}
 					
 					@Override
