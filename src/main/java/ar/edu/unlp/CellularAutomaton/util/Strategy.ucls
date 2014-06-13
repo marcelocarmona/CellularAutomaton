@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.5" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="ar.edu.unlp.CellularAutomaton.view.TriangleFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/TriangleFigure.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="667" y="521"/>    
+  <class id="1" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.CircleFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/CircleFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="65" y="395"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="ar.edu.unlp.CellularAutomaton.view.SquareFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/SquareFigure.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="713" y="378"/>    
+  <class id="2" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.RhombusFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/RhombusFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="121" y="532"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ar.edu.unlp.CellularAutomaton.view.RhombusFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/RhombusFigure.java" binary="false" 
+  <class id="3" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.GridUI" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/GridUI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="483" y="378"/>    
+    <position height="-1" width="-1" x="29" y="173"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ar.edu.unlp.CellularAutomaton.view.HexagonFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/HexagonFigure.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="246" y="378"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="ar.edu.unlp.CellularAutomaton.view.CircleFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/CircleFigure.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="298" y="521"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="6" language="java" name="ar.edu.unlp.CellularAutomaton.view.CellFigure" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/CellFigure.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="483" y="134"/>    
+  <interface id="4" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.CellFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/CellFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="329" y="174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="7" language="java" name="ar.edu.unlp.CellularAutomaton.view.GridPanel" project="CellularAutomaton2" 
-    file="/CellularAutomaton2/src/main/java/ar/edu/unlp/CellularAutomaton/view/GridPanel.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="131" y="133"/>    
+  <class id="5" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.TriangleFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/TriangleFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="538" y="532"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.HexagonFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/HexagonFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="330" y="395"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.SquareFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/SquareFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="606" y="395"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -72,32 +79,32 @@
     </display>  
   </class>  
   <realization id="8">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
   <realization id="9">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <realization id="10">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <association id="11">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="12" name="cellFigure"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+  <association id="10">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="11" name="CELL_FIGURES"/>      
+      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="13">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
   <realization id="14">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
   <realization id="15">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    

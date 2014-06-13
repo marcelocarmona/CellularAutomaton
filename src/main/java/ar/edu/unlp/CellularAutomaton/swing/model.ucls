@@ -4,7 +4,7 @@
   <class id="1" language="java" name="ar.edu.unlp.CellularAutomaton.model.Dead" project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Dead.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="388" y="547"/>    
+    <position height="-1" width="-1" x="386" y="649"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="ar.edu.unlp.CellularAutomaton.model.Alive" project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Alive.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="684" y="553"/>    
+    <position height="-1" width="-1" x="682" y="655"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -25,7 +25,7 @@
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/CellState.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="519" y="73"/>    
+    <position height="-1" width="-1" x="517" y="175"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -36,7 +36,7 @@
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/AbstractState.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="519" y="302"/>    
+    <position height="-1" width="-1" x="517" y="404"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -47,7 +47,7 @@
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/GameOfLifeCell.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="117" y="131"/>    
+    <position height="-1" width="-1" x="119" y="175"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,17 +58,18 @@
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/GameOfLifeGrid.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="121" y="545"/>    
+    <position height="-1" width="-1" x="21" y="647"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="ar.edu.unlp.CellularAutomaton.model.Rule" project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Rule.java" binary="false" 
+  <class id="7" language="java" name="ar.edu.unlp.CellularAutomaton.model.StateRuleImpl" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/StateRuleImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="825" y="263"/>    
+    <position height="-1" width="-1" x="945" y="725"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -78,428 +79,779 @@
   <class id="8" language="java" name="ar.edu.unlp.CellularAutomaton.model.RuleValue" project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/RuleValue.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1093" y="267"/>    
+    <position height="-1" width="-1" x="1193" y="726"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.RuleCheckListModel" 
+  <class id="9" language="java" name="ar.edu.unlp.CellularAutomaton.model.Neighborhood" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/RuleCheckListModel.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1022" y="629"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList.CheckListMouseAdapter" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1267" y="705"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList.CheckListRenderer" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1644" y="696"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1395" y="548"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/GameGridModel.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="370" y="1772"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.GridUI" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/GridUI.java" binary="false" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Neighborhood.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1305" y="1683"/>    
+    <position height="-1" width="-1" x="-347" y="647"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.JGrid" project="CellularAutomatonStates" 
+  <class id="10" language="java" name="ar.edu.unlp.CellularAutomaton.model.Neighbor" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Neighbor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-651" y="647"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="ar.edu.unlp.CellularAutomaton.swing.RuleFrame" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/RuleFrame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="813" y="-746"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="ar.edu.unlp.CellularAutomaton.swing.GameFrame" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/GameFrame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-191" y="-1901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="ar.edu.unlp.CellularAutomaton.swing.AboutDialog" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/AboutDialog.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-525" y="-1896"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.JGrid" project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/JGrid.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1062" y="1312"/>    
+    <position height="-1" width="-1" x="-191" y="-1422"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GridModel" 
+  <class id="15" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GridModel" 
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/GridModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="897" y="1756"/>    
+    <position height="-1" width="-1" x="-514" y="-1211"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.HomeState" 
+  <interface id="16" language="java" name="ar.edu.unlp.CellularAutomaton.model.GameGrid" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-202" y="2496"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="18" language="java" 
-    name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.NeighboorhoodState" 
-    project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="27" y="2680"/>    
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/GameGrid.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-197" y="225"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="19" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel" 
+  <class id="17" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/GameGridModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="20" y="1885"/>    
+    <position height="-1" width="-1" x="-514" y="-350"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.NeighboorState" 
+  <class id="18" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.Cell" 
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="27" y="2496"/>    
+    <position height="-1" width="-1" x="-52" y="-916"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.Cell" 
+  <class id="19" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.HomeState" 
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-207" y="2240"/>    
+    <position height="-1" width="-1" x="602" y="-707"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" 
+  <class id="20" language="java" 
     name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.NotNeighboorState" 
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-452" y="2496"/>    
+    <position height="-1" width="-1" x="375" y="-708"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="23" language="java" name="ar.edu.unlp.CellularAutomaton.model.GameGrid" 
+  <interface id="21" language="java" 
+    name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.NeighboorhoodState" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/GameGrid.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-1" y="1281"/>    
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="323" y="-916"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="24" language="java" name="ar.edu.unlp.CellularAutomaton.model.Neighborhood" 
+  <class id="22" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Neighborhood.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-190" y="545"/>    
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-54" y="-350"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="ar.edu.unlp.CellularAutomaton.model.Neighbor" project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Neighbor.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-446" y="541"/>    
+  <class id="23" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel.NeighboorState" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/NeighboorhoodGridModel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="128" y="-707"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="26">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="27" name="state"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+  <class id="24" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.GridUI" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/GridUI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="141" y="-1214"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.CircleFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/CircleFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="521" y="-1140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.RhombusFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/RhombusFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="750" y="-1140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="27" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.CellFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/CellFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="981" y="-1316"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.TriangleFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/TriangleFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1208" y="-1140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.HexagonFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/HexagonFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="979" y="-1140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.ui.SquareFigure" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/ui/SquareFigure.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1437" y="-1140"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.RuleCheckListModel" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/RuleCheckListModel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="571" y="-350"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="ar.edu.unlp.CellularAutomaton.util.GameThread" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/util/GameThread.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-648" y="-1731"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GameGridListener" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/GameGridListener.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-225" y="-1089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="34" language="java" name="ar.edu.unlp.CellularAutomaton.swing.grid.GridListener" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/grid/GridListener.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-226" y="-1215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="35" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1125" y="-748"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList.CheckListMouseAdapter" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1001" y="-632"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList.CheckListRenderer" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1340" y="-621"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="38" language="java" name="ar.edu.unlp.CellularAutomaton.util.Shape" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/util/Shape.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="360" y="-1638"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="39" language="java" name="ar.edu.unlp.CellularAutomaton.util.SpeedTime" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/util/SpeedTime.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="747" y="-1719"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="40" language="java" name="ar.edu.unlp.CellularAutomaton.util.CellFigures" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/util/CellFigures.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="557" y="-1701"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="41" language="java" name="ar.edu.unlp.CellularAutomaton.util.CellSize" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/util/CellSize.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="937" y="-1719"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="42" language="java" name="ar.edu.unlp.CellularAutomaton.model.DefaultRules" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/DefaultRules.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="443" y="945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="43" language="java" name="ar.edu.unlp.CellularAutomaton.App" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/App.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="112" y="-1902"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="ar.edu.unlp.CellularAutomaton.model.StateRule" 
+    project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/StateRule.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="946" y="403"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="45" language="java" name="ar.edu.unlp.CellularAutomaton.model.Rule" project="CellularAutomatonStates" 
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/Rule.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-119" y="1175"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="46">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="47" name="gameThread"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="-295" y="-23"/>    
+    <bendpoint x="520" y="-25"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="50" name="mouseDraggedState"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="30" name="neighborhood"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="33" name="neighbors"/>      
-      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="35">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="10"/>  
-  </nesting>  
-  <nesting id="36">    
-    <bendpoint x="152" y="2101"/>    
-    <bendpoint x="152" y="2420"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </nesting>  
-  <realization id="37">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="18"/>  
+  <realization id="52">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
   </realization>  
-  <realization id="38">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="18"/>  
+  <association id="53">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="54" name="aliveRule"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="44"/>  
   </realization>  
-  <nesting id="39">    
-    <bendpoint x="-79" y="2101"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="17"/>  
-  </nesting>  
-  <association id="40">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="41" name="DEAD"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
+  <association id="57">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="58" name="aboutDialog"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="44" name="values"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="46">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="23"/>  
-  </realization>  
-  <association id="47">    
-    <bendpoint x="-327" y="2420"/>    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="48" name="state"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="50">    
-    <bendpoint x="-58" y="2101"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="20"/>  
-  </nesting>  
-  <realization id="51">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <association id="52">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="53" name="ALIVE"/>      
-      <multiplicity id="54" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="55">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <association id="56">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="57" name="checkListModels"/>      
-      <multiplicity id="58" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="60" name="STATES"/>      
-      <multiplicity id="61" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="62">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <association id="63">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="64" name="grid"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="66">    
+  <association id="60">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="67" name="rule"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
+      <attribute id="61" name="neighbors"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="69">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="70" name="model"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="72">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="73" name="neighborhoodGrid"/>      
-      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="75">    
+  <generalization id="63">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <association id="76">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="77" name="grid"/>      
-      <multiplicity id="78" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="79">    
-    <bendpoint x="173" y="2101"/>    
-    <bendpoint x="173" y="2420"/>    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="80" name="mouseDraggedState"/>      
-      <multiplicity id="81" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="82">    
-    <bendpoint x="-335" y="2101"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="22"/>  
+  <realization id="64">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <nesting id="65">    
+    <bendpoint x="6" y="-769"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
   </nesting>  
-  <dependency id="83">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="16"/>  
-  </dependency>  
-  <association id="84">    
+  <realization id="66">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <association id="67">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="85" name="cells"/>      
-      <multiplicity id="86" minimum="0" maximum="2147483647"/>    
+      <attribute id="68" name="cells"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="87">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="14"/>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="12"/>  
   </dependency>  
-  <nesting id="88">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="21"/>  
-  </nesting>  
-  <association id="89">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="90" name="rule"/>      
-      <multiplicity id="91" minimum="0" maximum="1"/>    
+  <association id="71">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="72" name="grid"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="92">    
+  <association id="74">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="75" name="deadStateRule"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <bendpoint x="649" y="-586"/>    
+    <bendpoint x="467" y="-586"/>    
+    <bendpoint x="328" y="-521"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="78" name="neighboorhoodGridModel"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="81" name="neighborhoodGrid"/>      
+      <multiplicity id="82" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="84" name="listModels"/>      
+      <multiplicity id="85" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="86">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <nesting id="93">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="11"/>  
+  <realization id="87">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <nesting id="88">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
   </nesting>  
-  <association id="94">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="95" name="mouseDraggedState"/>      
-      <multiplicity id="96" minimum="0" maximum="1"/>    
+  <nesting id="89">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="36"/>  
+  </nesting>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="91">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="92" name="deadRule"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="94">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="95">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <realization id="96">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <realization id="97">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <association id="98">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="99" name="rule"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="102" name="model"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="105" name="neighborhood"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="108" name="gameGridModel"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="111" name="checkListModels"/>      
+      <multiplicity id="112" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="113">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="114" name="cellFigure"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="116">    
+    <bendpoint x="-347" y="945"/>    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="117" name="neighborhood"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <realization id="120">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="121">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="122" name="grid"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="124">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <association id="125">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="126" name="neighborhood"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="128">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="129">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="130" name="values"/>      
+      <multiplicity id="131" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="133" name="state"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="97">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
+  <nesting id="135">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <realization id="136">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
   </realization>  
-  <dependency id="98">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="5"/>  
+  <generalization id="137">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="138">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="139" name="gameOfLifeGridListener"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="141">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="35"/>  
   </dependency>  
+  <association id="142">    
+    <bendpoint x="-648" y="-348"/>    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="143" name="gameGridModel"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <bendpoint x="6" y="-769"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="146" name="mouseDraggedState"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="149" name="aliveStateRule"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="151">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </nesting>  
+  <realization id="152">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="153">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="154" name="CELL_FIGURES"/>      
+      <multiplicity id="155" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="156">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="37"/>  
+  </nesting>  
+  <association id="157">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="158" name="gridComponent"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="161" name="rule"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="164" name="state"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

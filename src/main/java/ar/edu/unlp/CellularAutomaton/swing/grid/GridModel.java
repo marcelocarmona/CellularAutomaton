@@ -28,12 +28,13 @@ public abstract class GridModel {
 	/** The listeners waiting for model changes. */
 	protected EventListenerList listenerList = new EventListenerList();
 
+
 	/**
 	 * figure and cell size
 	 */
 	private int cellSize = DEFAULT_CELL_SIZE;
 	private int cellFigure = SQUARE_FIGURE;
-	
+
 
 	/**
 	 * Adds a <code>GridListener</code> to the model.

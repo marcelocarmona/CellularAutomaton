@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.5" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList" 
+  <interface id="1" language="java" name="ar.edu.unlp.CellularAutomaton.model.StateRule" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="359" y="-388"/>    
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/StateRule.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="242" y="137"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="2" language="java" name="ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList.CheckListRenderer" 
+  </interface>  
+  <class id="2" language="java" name="ar.edu.unlp.CellularAutomaton.model.StateRuleImpl" 
     project="CellularAutomatonStates" 
-    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/JCheckList.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="613" y="-240"/>    
+    file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/model/StateRuleImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="115" y="476"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -27,21 +27,30 @@
     project="CellularAutomatonStates" 
     file="/CellularAutomatonStates/src/main/java/ar/edu/unlp/CellularAutomaton/swing/checkList/RuleCheckListModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="169" y="-156"/>    
+    <position height="-1" width="-1" x="392" y="493"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <nesting id="4">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
-  </nesting>  
-  <dependency id="5">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
+  <association id="4">    
+    <bendpoint x="393" y="139"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="5" name="rule"/>      
+      <multiplicity id="6" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="7">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

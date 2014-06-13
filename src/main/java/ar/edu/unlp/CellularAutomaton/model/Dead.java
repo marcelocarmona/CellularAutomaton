@@ -7,7 +7,7 @@ package ar.edu.unlp.CellularAutomaton.model;
  */
 public class Dead extends AbstractState {
 	
-	public Dead(Rule rule) {
+	public Dead(StateRule rule) {
 		super(rule);
 		setColor(0x333333);
 	}

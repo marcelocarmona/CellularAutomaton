@@ -11,8 +11,8 @@ public class GameOfLifeCell {
 	/**
 	 * States of cells 
 	 */
-	public static final CellState ALIVE = new Alive(new Rule(8,"Survivals",2,3));
-	public static final CellState DEAD = new Dead(new Rule(8,"Births",3));
+	public static final CellState ALIVE = new Alive(new StateRuleImpl(8,"Survivals",2,3));
+	public static final CellState DEAD = new Dead(new StateRuleImpl(8,"Births",3));
 	public static final CellState[] STATES = {ALIVE, DEAD};
 	
 	/**
@@ -79,12 +79,19 @@ public class GameOfLifeCell {
 	}
 	
 	/**
+	 * @param cell cell add this cell
+	 */
+	public void addNeighbor(GameOfLifeCell cell) {
+		cell.addAliveNeighbor(this);
+	}
+	
+	/**
 	 * @param cell if cell's state is alive add one
 	 */
 	public void addAliveNeighbor(GameOfLifeCell cell) {
-		cell.getState().addAliveNeighbor(this);
+		state.addAliveNeighbor(cell);
 	}
-	
+
 	/**
 	 * Apply transition function depending on the state
 	 */

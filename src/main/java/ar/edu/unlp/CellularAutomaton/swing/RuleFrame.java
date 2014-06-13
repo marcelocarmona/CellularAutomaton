@@ -2,8 +2,8 @@ package ar.edu.unlp.CellularAutomaton.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +21,16 @@ import javax.swing.table.AbstractTableModel;
 
 import ar.edu.unlp.CellularAutomaton.model.CellState;
 import ar.edu.unlp.CellularAutomaton.model.GameOfLifeCell;
-import ar.edu.unlp.CellularAutomaton.model.GameOfLifeGrid;
-import ar.edu.unlp.CellularAutomaton.model.Rule;
-import ar.edu.unlp.CellularAutomaton.model.RuleDescriptor;
+import ar.edu.unlp.CellularAutomaton.model.DefaultRules;
+import ar.edu.unlp.CellularAutomaton.model.StateRule;
 import ar.edu.unlp.CellularAutomaton.swing.checkList.JCheckList;
 import ar.edu.unlp.CellularAutomaton.swing.checkList.RuleCheckListModel;
 import ar.edu.unlp.CellularAutomaton.swing.grid.GameGridModel;
-import ar.edu.unlp.CellularAutomaton.swing.grid.GridListener;
 import ar.edu.unlp.CellularAutomaton.swing.grid.JGrid;
 import ar.edu.unlp.CellularAutomaton.swing.grid.NeighboorhoodGridModel;
 
-import javax.swing.event.ChangeEvent;
+
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -50,26 +49,10 @@ public class RuleFrame extends JFrame {
 	private NeighboorhoodGridModel neighboorhoodGridModel;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RuleFrame frame = new RuleFrame(new GameGridModel(new GameOfLifeGrid(5, 5)));
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public RuleFrame(final GameGridModel gameGridModel) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GameFrame.class.getResource("/ar/edu/unlp/CellularAutomaton/util/icon.png")));
 		setTitle("Rules");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 552, 473);
@@ -79,7 +62,7 @@ public class RuleFrame extends JFrame {
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 
 		
-		//create Rule Panel
+		//create StateRuleImpl Panel
 		JPanel rulePanel = new JPanel();
 		rulePanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rules", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
 		rulePanel.setLayout(new BoxLayout(rulePanel, BoxLayout.Y_AXIS));
@@ -98,7 +81,7 @@ public class RuleFrame extends JFrame {
 		//initialize lists models and NeighborhoodComponent
 		listModels = new ArrayList<RuleCheckListModel>();
 		for (CellState cellState : GameOfLifeCell.STATES) {
-			Rule rule = cellState.getRule();
+			StateRule rule = cellState.getRule();
 			RuleCheckListModel ruleCheckListModel = new RuleCheckListModel(rule);
 			listModels.add(ruleCheckListModel);
 			JCheckList list = new JCheckList(ruleCheckListModel);
@@ -136,22 +119,6 @@ public class RuleFrame extends JFrame {
 				JScrollPane ruleDescriptorScrollPane = new JScrollPane();
 				ruleDescriptorScrollPane.setBorder(null);
 				ruleTableDescriptorPanel.add(ruleDescriptorScrollPane);
-				ruleDescriptorScrollPane.getViewport().setName("jajja");
-				
-				gameGridModel.addGridListener(new GridListener() {
-					
-					@Override
-					public void stateChanged(ChangeEvent e) {
-						System.out.println("cambio");
-						
-					}
-					
-					@Override
-					public void cellSizeChanged(ChangeEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
 				
 				//TODO accion de la tabla al hacer click
 				ruleDescriptorTable = new JTable();
@@ -165,12 +132,12 @@ public class RuleFrame extends JFrame {
 				            int maxIndex = lsm.getMaxSelectionIndex();
 				            for (int i = minIndex; i <= maxIndex; i++) {
 				                if (lsm.isSelectedIndex(i)) {
-				                	RuleDescriptor ruleDescriptor = RuleDescriptor.values()[i];
+				                	DefaultRules ruleDescriptor = DefaultRules.values()[i];
 				                	txtrDesxcription.setText(ruleDescriptor.getDescription());
 						        	//Update neighboorhoodGridModel
-						        	System.out.println(gameGridModel.getNeighborhood());
+						        	
 						        	gameGridModel.setNeighborhood(ruleDescriptor.getNeighborhood());
-						        	//Update Rule
+						        	//Update StateRuleImpl
 						        	listModels.get(0).loadRule(ruleDescriptor.getAliveRule());
 						        	listModels.get(1).loadRule(ruleDescriptor.getDeadRule());
 //						        	GameOfLifeCell.ALIVE.setRule(ruleDescriptor.getAliveRule());
@@ -200,13 +167,13 @@ public class RuleFrame extends JFrame {
 							 value = rowIndex;
 						     break;
 						 case 1: 
-							 value = RuleDescriptor.values()[rowIndex].getName();
+							 value = DefaultRules.values()[rowIndex].getName();
 						     break;
 						 case 2: 
-							 value = RuleDescriptor.values()[rowIndex].getAliveRule().toString()+"/"+RuleDescriptor.values()[rowIndex].getDeadRule();
+							 value = DefaultRules.values()[rowIndex].getAliveRule().toString()+"/"+DefaultRules.values()[rowIndex].getDeadRule();
 						     break;
 						 case 3: 
-							 value = RuleDescriptor.values()[rowIndex].getDescription();
+							 value = DefaultRules.values()[rowIndex].getDescription();
 						}
 						return value;
 						
@@ -233,7 +200,7 @@ public class RuleFrame extends JFrame {
 
 					@Override
 					public int getRowCount() {
-						return RuleDescriptor.values().length;
+						return DefaultRules.values().length;
 					}
 					
 					@Override

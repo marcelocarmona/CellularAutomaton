@@ -62,7 +62,7 @@ public class GridUI extends ComponentUI {
 	 * @see javax.swing.plaf.ComponentUI#installUI(javax.swing.JComponent)
 	 */
 	public void installUI(JComponent c) {
-		this.grid = (JGrid) c;c.setBackground(Color.BLUE);
+		this.grid = (JGrid) c;
 //		installDefaults();
 //		installComponents();
 		installListeners();
@@ -179,12 +179,13 @@ public class GridUI extends ComponentUI {
 		//draw Background
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, c.getWidth(), c.getHeight());
+        
 		
 		//draw cells
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				g.setColor(this.grid.getModel().getCellColor(col,row));
-				cellFigure.paint(g, cellSize, col, row);
+				cellFigure.paint(g, cellSize, col , row );
 
 			}
 		}

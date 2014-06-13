@@ -8,14 +8,14 @@ package ar.edu.unlp.CellularAutomaton.model;
  * @author mclo
  */
 public abstract class AbstractState implements CellState {
-	private Rule rule;
+	private StateRule rule;
 	private int color;
  
 	/**
 	 * Constructor
 	 * @param rule rule of the state
 	 */
-	public AbstractState(Rule rule) {
+	public AbstractState(StateRule rule) {
 		super();
 		this.rule = rule;
 	}
@@ -23,14 +23,14 @@ public abstract class AbstractState implements CellState {
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#getRule()
 	 */
-	public Rule getRule() {
+	public StateRule getRule() {
 		return rule;
 	}
 
 	/* (non-Javadoc)
 	 * @see ar.edu.unlp.CellularAutomaton.model.CellState#setRule(ar.edu.unlp.CellularAutomaton.model.ArrayRule)
 	 */
-	public void setRule(Rule rule) {
+	public void setRule(StateRule rule) {
 		this.rule = rule;
 	}
 

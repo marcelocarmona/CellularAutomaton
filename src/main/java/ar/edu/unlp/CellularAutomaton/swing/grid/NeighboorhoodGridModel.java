@@ -94,25 +94,16 @@ public class NeighboorhoodGridModel extends GridModel {
 	}
 
 	@Override
-	public void mouseWheelAction(int rotation) {System.out.println(getCellSize()+"-->"+cols+","+getGridWidth()+" - "+rows+", "+getGridHeight());
-		if (cols != getGridWidth() && rows != getGridHeight()) {
-			super.mouseWheelAction(rotation);
-		} else 
-			if (rotation < 0) super.mouseWheelAction(rotation);
-	}
-
-	@Override
 	public void componentResizedAction(int cols, int rows) {
-		if (cols < getGridWidth() || rows < getGridHeight()) 
-			return;
-		 	else{
+		if (cols > getGridWidth() && rows > getGridHeight()) {
 		 		this.cols = cols;
 		 		this.rows = rows;
 				center_col = cols / 2;
 				center_row = rows / 2;
+				init();
+				
 		 	}
-			init();
-			fireStateChanged();
+		fireStateChanged();
 	}
 	
 	/**
@@ -264,7 +255,7 @@ public class NeighboorhoodGridModel extends GridModel {
 			cell.setState(NOT_NEIGHBOOR_STATE);
 			gameGridModel.getNeighborhood().remove(cell.getCol(), cell.getRow());
 			for (RuleCheckListModel checkListModel : checkListModels) {
-				checkListModel.removeElement();
+				checkListModel.removeLast();
 			}
 		}
 
@@ -283,9 +274,8 @@ public class NeighboorhoodGridModel extends GridModel {
 		public void switchState(Cell cell) {
 			cell.setState(NEIGHBOOR_STATE);	
 			gameGridModel.getNeighborhood().add(cell.getCol(), cell.getRow());
-			System.out.println(gameGridModel.getNeighborhood());
 			for (RuleCheckListModel checkListModel : checkListModels) {
-				checkListModel.addElement();
+				checkListModel.addLast();
 			}
 		}
 

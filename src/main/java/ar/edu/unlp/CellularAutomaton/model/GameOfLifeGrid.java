@@ -135,13 +135,19 @@ public class GameOfLifeGrid implements GameGrid {
 	 */
 	private void addAliveNeighbor(GameOfLifeCell cell, int col, int row){
 		try {
-			cell.addAliveNeighbor(cells[ mod(col,cols)][mod(row,rows)]);
+			cell.addNeighbor(cells[ mod(col,cols)][mod(row, rows)]);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println(col+", "+row);
 			//ignore border of the grid
 		}
 	}
 	
+	/**
+	 * used for circular frontier
+	 * @param i col
+	 * @param j	row
+	 * @return 
+	 */
 	private int mod(int i,int j){
 		return ((i % j) + j) % j;
 	}

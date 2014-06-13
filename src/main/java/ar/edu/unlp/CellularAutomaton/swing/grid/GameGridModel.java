@@ -47,7 +47,7 @@ public class GameGridModel extends GridModel implements GameGrid {
 		return new Color(grid.getCell(col, row).getColor());
 	}
 	
-	//GameGrid adapter
+	//GameGrid decorator
 	
 	public int getRows() {
 		return grid.getRows();
