@@ -95,5 +95,10 @@ public class GameGridModel extends GridModel implements GameGrid {
 		fireStateChanged();
 	}
 
+	public void setNeighborhood(Neighborhood neighborhood) {
+		grid.getRule().setNeighborhood(neighborhood);
+		fireStateChanged();
+	}
+
 
 }

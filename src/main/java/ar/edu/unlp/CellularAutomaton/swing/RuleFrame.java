@@ -205,8 +205,8 @@ public class RuleFrame extends JFrame {
 				                	
 				                	GameOfLifeCell.ALIVE.getStateRule().loadRule(rule.getAliveState().getStateRule());
 						        	GameOfLifeCell.DEAD.getStateRule().loadRule(rule.getDeadState().getStateRule());
-						        	gameGridModel.getRule().setNeighborhood(new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))));
-						        	
+						        	gameGridModel.setNeighborhood(new Neighborhood(new CopyOnWriteArraySet<Neighbor>(Arrays.asList(new Neighbor(-1,-1),new Neighbor(-1,0),new Neighbor(-1,1),new Neighbor(0,-1),new Neighbor(0,1),new Neighbor(1,-1),new Neighbor(1,0),new Neighbor(1,1)))));
+
 //						        	gameGridModel.setNeighborhood(rule.getNeighborhood());
 //						        	gameGridModel.getRule().setNeighborhood(rule.getNeighborhood());
 						        	
